@@ -18,12 +18,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: setup
-        uses: ./.github/actions/setup
+        uses: hatena/hatenablog-workflows/.github/actions/setup@main
       - name: pull
         run: |
           blogsync pull ${{ inputs.BLOG_DOMAIN }}
       - name: delete draft files
-        uses: ./.github/actions/delete-draft-files
+        uses: hatena/hatenablog-workflows/.github/actions/delete-draft-files@main
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:

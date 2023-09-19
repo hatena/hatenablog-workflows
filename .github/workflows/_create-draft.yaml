@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: setup
-        uses: ./.github/actions/setup
+        uses: hatena/hatenablog-workflows/.github/actions/setup@main
       - name: setup draft
         run: |
           envsubst < draft.md.template > draft.md
@@ -32,7 +32,7 @@ jobs:
         run: |
           blogsync post --draft ${{ inputs.BLOG_DOMAIN }} < 'draft.md'
       - name: pull draft by title
-        uses: ./.github/actions/pull-draft-by-title
+        uses: hatena/hatenablog-workflows/.github/actions/pull-draft-by-title@main
         with:
           title: ${{ inputs.title }}
           BLOG_DOMAIN: ${{ inputs.BLOG_DOMAIN }}

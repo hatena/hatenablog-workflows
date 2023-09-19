@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: setup
-        uses: ./.github/actions/setup
+        uses: hatena/hatenablog-workflows/.github/actions/setup@main
       - name: Get changed draft files
         id: changed-draft-files
         uses: tj-actions/changed-files@v39
