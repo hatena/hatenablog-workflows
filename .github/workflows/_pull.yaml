@@ -23,7 +23,11 @@ jobs:
         run: |
           blogsync pull ${{ inputs.BLOG_DOMAIN }}
       - name: delete draft files
-        uses: hatena/hatenablog-workflows/.github/actions/delete-draft-files@main
+        run: |
+          draft_files=($(grep -xl 'Draft: true' $(git ls-files -mo --exclude-standard)))
+          for file in ${draft_files[@]}; do
+            rm "$file"
+          done
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:
