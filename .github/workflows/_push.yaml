@@ -1,0 +1,37 @@
+name: "[Reusable workflows] push to hatena blog"
+
+on:
+  workflow_call:
+    inputs:
+      local_root:
+        default: "entries"
+        type: string
+    secrets:
+      OWNER_API_KEY:
+        required: true
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    env:
+      BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: setup
+        uses: ./.github/actions/setup
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v39
+        with:
+          files: ${{ inputs.local_root }}/**
+          since_last_remote_commit: true
+      - name: blogsync push
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            draft=$(yq --front-matter=extract 'select(.Draft == true)' "$file")
+            if [[ -z "$draft" ]]; then
+              blogsync push "$file"
+            fi
+          done

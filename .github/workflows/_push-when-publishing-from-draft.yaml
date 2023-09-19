@@ -1,0 +1,71 @@
+name: "[Reusable workflows] push when publishing from draft"
+
+on:
+  workflow_call:
+    inputs:
+      BLOG_DOMAIN:
+        required: true
+        type: string
+    secrets:
+      OWNER_API_KEY:
+        required: true
+
+jobs:
+  push-when-publishing-from-draft:
+    runs-on: ubuntu-latest
+    env:
+      BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: setup
+        uses: ./.github/actions/setup
+      - name: Get changed draft files
+        id: changed-draft-files
+        uses: tj-actions/changed-files@v39
+        with:
+          files: draft_entries/**
+          since_last_remote_commit: true
+      - name: blogsync push and delete file
+        id: publised-from-draft
+        run: |
+          published_from_draft_edit_urls=()
+          for file in ${{ steps.changed-draft-files.outputs.all_changed_files }}; do
+            draft=$(yq --front-matter=extract 'select(.Draft == true)' "$file")
+            if [[ -z "$draft" ]]; then
+              blogsync push "$file"
+              published_from_draft_edit_urls+=($(yq '.EditURL' --front-matter=extract "$file"))
+              rm "$file"
+            fi
+          done
+          echo "PUBLISHED_FROM_DRSFT_EDIT_URLS=${published_from_draft_edit_urls[@]}" >> $GITHUB_OUTPUT
+      - name: pull
+        run: |
+          blogsync pull ${{ inputs.BLOG_DOMAIN }}
+      - name: delete other files
+        run: |
+          files=($(git ls-files -o --exclude-standard))
+          for file in ${files[@]}; do
+            editurl=$(yq '.EditURL' --front-matter=extract $(echo $file))
+            if printf '%s\n' "${{ steps.publised-from-draft.outputs.PUBLISHED_FROM_DRSFT_EDIT_URLS }}" | grep -qvx "$editurl"; then
+              rm "$file"
+            fi
+          done
+      - name: create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: from draft to publish
+          branch: from-draft-to-publish
+          commit-message: |
+            from draft to publish
+          body: |
+            はてなブログに公開したファイルを`local_root`で指定したディレクトリに移動しました
+          delete-branch: true
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash

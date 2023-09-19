@@ -1,0 +1,38 @@
+name: "[Reusable workflows] create draft and pull from hatenablog"
+
+on:
+  workflow_call:
+    inputs:
+      title:
+        required: true
+        type: string
+      BLOG_DOMAIN:
+        required: true
+        type: string
+    secrets:
+      OWNER_API_KEY:
+        required: true
+
+jobs:
+  post_draft_and_pull_from_hatenablog:
+    name: create draft and pull from hatenablog
+    runs-on: ubuntu-latest
+    env:
+      BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup
+        uses: ./.github/actions/setup
+      - name: setup draft
+        run: |
+          envsubst < draft.md.template > draft.md
+        env:
+          TITLE: ${{ inputs.title }}
+      - name: post draft to hatenablog
+        run: |
+          blogsync post --draft ${{ inputs.BLOG_DOMAIN }} < 'draft.md'
+      - name: pull draft by title
+        uses: ./.github/actions/pull-draft-by-title
+        with:
+          title: ${{ inputs.title }}
+          BLOG_DOMAIN: ${{ inputs.BLOG_DOMAIN }}

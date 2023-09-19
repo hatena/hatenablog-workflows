@@ -1,0 +1,36 @@
+name: "[Reusable workflows] pull from hatenablog"
+
+on:
+  workflow_call:
+    inputs:
+      BLOG_DOMAIN:
+        required: true
+        type: string
+    secrets:
+      OWNER_API_KEY:
+        required: true
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    env:
+      BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup
+        uses: ./.github/actions/setup
+      - name: pull
+        run: |
+          blogsync pull ${{ inputs.BLOG_DOMAIN }}
+      - name: delete draft files
+        uses: ./.github/actions/delete-draft-files
+      - name: create pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: blogsync pull
+          branch: blogsync-pull
+          commit-message: |
+            blogsync pull
+          body: |
+            blogsync pull
+          delete-branch: true

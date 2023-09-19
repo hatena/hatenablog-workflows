@@ -1,0 +1,29 @@
+name: "[Reusable workflows] pull draft entry from hatenablog"
+
+on:
+  workflow_call:
+    inputs:
+      title:
+        required: true
+        type: string
+      BLOG_DOMAIN:
+        required: true
+        type: string
+    secrets:
+      OWNER_API_KEY:
+        required: true
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    env:
+      BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup
+        uses: ./.github/actions/setup
+      - name: pull draft by title
+        uses: ./.github/actions/pull-draft-by-title
+        with:
+          title: ${{ inputs.title }}
+          BLOG_DOMAIN: ${{ inputs.BLOG_DOMAIN }}

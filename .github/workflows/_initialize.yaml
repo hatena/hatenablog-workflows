@@ -1,0 +1,36 @@
+name: "[Reusable workflows] initialize"
+
+on:
+  workflow_call:
+    inputs:
+      BLOG_DOMAIN:
+        required: true
+        type: string
+    secrets:
+      OWNER_API_KEY:
+        required: true
+
+jobs:
+  initialize:
+    env:
+      BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup
+        uses: ./.github/actions/setup
+      - name: pull
+        run: |
+          blogsync pull ${{ inputs.BLOG_DOMAIN }}
+      - name: move draft and update metadata
+        uses: ./.github/actions/move-draft-and-update-metadata
+      - name: create pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: initialize
+          branch: initialize
+          commit-message: |
+            initialize
+          body: |
+            initialize
+          delete-branch: true
