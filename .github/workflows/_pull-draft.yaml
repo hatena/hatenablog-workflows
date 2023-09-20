@@ -21,9 +21,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@main
+        uses: hatena/hatenablog-workflows/.github/actions/setup@v1
       - name: pull draft by title
-        uses: hatena/hatenablog-workflows/.github/actions/pull-draft-by-title@main
+        uses: hatena/hatenablog-workflows/.github/actions/pull-draft-by-title@v1
         with:
           title: ${{ inputs.title }}
           BLOG_DOMAIN: ${{ inputs.BLOG_DOMAIN }}

@@ -18,12 +18,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@main
+        uses: hatena/hatenablog-workflows/.github/actions/setup@v1
       - name: pull
         run: |
           blogsync pull ${{ inputs.BLOG_DOMAIN }}
       - name: move draft and update metadata
-        uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@main
+        uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@v1
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:

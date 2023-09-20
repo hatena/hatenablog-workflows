@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@main
+        uses: hatena/hatenablog-workflows/.github/actions/setup@v1
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v39
