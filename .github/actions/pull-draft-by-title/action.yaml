@@ -23,7 +23,11 @@ runs:
           exit 1
         fi
         echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d')" >> $GITHUB_OUTPUT
-        echo "OWNER_NAME=$(yq ".[\"${{ inputs.BLOG_DOMAIN }}\"].owner" blogsync.yaml)" >> $GITHUB_OUTPUT
+        owner=$(yq ".[\"${{ inputs.BLOG_DOMAIN }}\"].owner" blogsync.yaml)
+        if [[ "$owner" == 'null' ]]; then
+          owner=$(yq ".[\"${{ inputs.BLOG_DOMAIN }}\"].username" blogsync.yaml)
+        fi
+        echo "OWNER_NAME="$owner"" >> $GITHUB_OUTPUT
       shell: bash
     - name: delete other files
       run: |
