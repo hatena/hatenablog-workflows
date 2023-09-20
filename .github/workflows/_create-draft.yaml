@@ -21,8 +21,10 @@ jobs:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
     steps:
       - uses: actions/checkout@v4
-      - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@main
+      - name: setup blogsync
+        uses: x-motemen/blogsync@v0
+        with:
+          version: latest
       - name: setup draft
         run: |
           envsubst < draft.md.template > draft.md

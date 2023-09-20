@@ -19,8 +19,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@main
+      - name: setup blogsync
+        uses: x-motemen/blogsync@v0
+        with:
+          version: latest
       - name: Get changed draft files
         id: changed-draft-files
         uses: tj-actions/changed-files@v39

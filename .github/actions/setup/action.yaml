@@ -1,9 +1,0 @@
-name: Setup blogsync
-
-runs:
-  using: "composite"
-  steps:
-    - name: setup blogsync
-      uses: x-motemen/blogsync@v0
-      with:
-        version: latest
