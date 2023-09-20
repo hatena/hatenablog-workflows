@@ -33,8 +33,43 @@ jobs:
       - name: post draft to hatenablog
         run: |
           blogsync post --draft ${{ inputs.BLOG_DOMAIN }} < 'draft.md'
-      - name: pull draft by title
-        uses: hatena/hatenablog-workflows/.github/actions/pull-draft-by-title@main
+      - name: pull
+        run: |
+          blogsync pull ${{ inputs.BLOG_DOMAIN }}
+      - name: find entry
+        id: find-entry
+        run: |
+          entry=$(grep -xl "Title: ${{ inputs.title }}" $(git ls-files -o --exclude-standard))
+          if [[ -z "$entry" ]]; then
+            echo "Error: No draft entry titled ${{ inputs.title }} was found"
+            exit 1
+          fi
+          echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d')" >> $GITHUB_OUTPUT
+          echo "OWNER_NAME=$(yq ".[\"${{ inputs.BLOG_DOMAIN }}\"].owner" blogsync.yaml)" >> $GITHUB_OUTPUT
+      - name: delete other files
+        run: |
+          delete_files=($(grep -xL "Title: ${{ inputs.title }}" $(git ls-files -mo --exclude-standard)))
+          for file in ${delete_files[@]}; do
+            rm "$file"
+          done
+      - name: move draft and update metadata
+        run: |
+          draft_files=($(grep -xl 'Draft: true' $(git ls-files -mo --exclude-standard)))
+          for file in ${draft_files[@]}; do
+            entry_id=$(yq --front-matter=extract '.EditURL' "$file" | grep -oP '[^/]+\d')
+            yq --front-matter=process -i 'del(.Date,.URL)' "$file" 
+            mv "$file" "draft_entries/$entry_id.${file##*.}"
+          done
+      - name: create pull request
+        uses: peter-evans/create-pull-request@v5
+        env:
+          OWNER_NAME: ${{ steps.find-entry.outputs.OWNER_NAME }}
+          ENTRY_ID: ${{ steps.find-entry.outputs.ENTRY_ID }}
         with:
-          title: ${{ inputs.title }}
-          BLOG_DOMAIN: ${{ inputs.BLOG_DOMAIN }}
+          title: ${{ github.event.inputs.title }}
+          branch: draft-entry-${{ env.ENTRY_ID }}
+          body: |
+            ## ${{ github.event.inputs.title }}
+            編集ページのURL
+            https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
+          delete-branch: true
