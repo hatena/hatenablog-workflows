@@ -3,7 +3,15 @@ name: Setup blogsync
 runs:
   using: "composite"
   steps:
+    - name: setup git-restore-mtime
+      run: |
+        sudo apt-get install -y git-restore-mtime
+      shell: bash
     - name: setup blogsync
       uses: x-motemen/blogsync@v0
       with:
         version: latest
+    - name: restore mtime
+      run: |
+        git restore-mtime
+      shell: bash
