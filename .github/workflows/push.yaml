@@ -32,7 +32,8 @@ jobs:
           since_last_remote_commit: true
       - name: blogsync push
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          files=(${{ steps.changed-files.outputs.all_changed_files }})
+          for file in "${files[@]}"; do
             draft=$(yq --front-matter=extract 'select(.Draft == true)' "$file")
             if [[ -z "$draft" ]]; then
               blogsync push "$file"
