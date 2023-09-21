@@ -3,6 +3,9 @@ name: "[Reusable workflows] initialize"
 on:
   workflow_call:
     inputs:
+      is_draft_included:
+        default: true
+        type: boolean
       BLOG_DOMAIN:
         required: true
         type: string
@@ -25,7 +28,16 @@ jobs:
         run: |
           blogsync pull ${{ inputs.BLOG_DOMAIN }}
       - name: move draft and update metadata
+        if: inputs.is_draft_included == true
         uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@v1
+      - name: delete draft files
+        if: inputs.is_draft_included == false
+        run: |
+          target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true')
+          IFS=" " read -r -a draft_files <<< "$(echo "$target" | xargs)"
+          for file in "${draft_files[@]}"; do
+            rm "$file"
+          done
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:
