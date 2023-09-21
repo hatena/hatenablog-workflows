@@ -23,6 +23,10 @@ runs:
           exit 1
         fi
         echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d')" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: set owner
+      id: set-owner
+      run: |
         owner=$(yq ".[\"${{ inputs.BLOG_DOMAIN }}\"].owner" blogsync.yaml)
         if [[ "$owner" == 'null' ]]; then
           owner=$(yq ".[\"${{ inputs.BLOG_DOMAIN }}\"].username" blogsync.yaml)
@@ -41,7 +45,7 @@ runs:
     - name: create pull request
       uses: peter-evans/create-pull-request@v5
       env:
-        OWNER_NAME: ${{ steps.find-entry.outputs.OWNER_NAME }}
+        OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
         ENTRY_ID: ${{ steps.find-entry.outputs.ENTRY_ID }}
       with:
         title: ${{ github.event.inputs.title }}
