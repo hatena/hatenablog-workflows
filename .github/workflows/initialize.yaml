@@ -35,4 +35,6 @@ jobs:
             initialize
           body: |
             initialize
+          labels: |
+            skip-push
           delete-branch: true

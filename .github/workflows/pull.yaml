@@ -39,4 +39,6 @@ jobs:
             blogsync pull
           body: |
             blogsync pull
+          labels: |
+            skip-push
           delete-branch: true

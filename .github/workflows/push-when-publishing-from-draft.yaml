@@ -14,7 +14,7 @@ jobs:
   push-when-publishing-from-draft:
     if: |
       github.event.pull_request.merged == true
-      && !contains(fromJSON('["from-draft-to-publish", "blogsync-pull", "initialize"]'), github.head_ref)
+      && !contains(github.event.pull_request.labels.*.name, 'skip-push')
     runs-on: ubuntu-latest
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
@@ -63,6 +63,8 @@ jobs:
           branch: from-draft-to-publish
           commit-message: |
             from draft to publish
+          labels: |
+            skip-push
           body: |
             はてなブログに公開したファイルを`local_root`で指定したディレクトリに移動しました
           delete-branch: true
