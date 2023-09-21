@@ -12,6 +12,9 @@ on:
 
 jobs:
   push-when-publishing-from-draft:
+    if: |
+      github.event.pull_request.merged == true
+      && !contains(fromJSON('["from-draft-to-publish", "blogsync-pull", "initialize"]'), github.head_ref)
     runs-on: ubuntu-latest
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
