@@ -27,12 +27,12 @@ jobs:
         uses: hatena/hatenablog-workflows/.github/actions/setup@v1
       - name: setup draft
         run: |
-          envsubst < draft.md.template > draft.md
+          envsubst < draft.template > draft
         env:
           TITLE: ${{ inputs.title }}
       - name: post draft to hatenablog
         run: |
-          blogsync post --draft ${{ inputs.BLOG_DOMAIN }} < 'draft.md'
+          blogsync post --draft ${{ inputs.BLOG_DOMAIN }} < 'draft'
       - name: pull draft by title
         uses: hatena/hatenablog-workflows/.github/actions/pull-draft-by-title@v1
         with:
