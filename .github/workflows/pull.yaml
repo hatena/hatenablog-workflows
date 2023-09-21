@@ -26,8 +26,9 @@ jobs:
           blogsync pull ${{ inputs.BLOG_DOMAIN }}
       - name: delete draft files
         run: |
-          draft_files=($(grep -xl 'Draft: true' $(git ls-files -mo --exclude-standard)))
-          for file in ${draft_files[@]}; do
+          target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true')
+          IFS=" " read -r -a draft_files <<< "$(echo "$target" | xargs)"
+          for file in "${draft_files[@]}"; do
             rm "$file"
           done
       - name: create pull request
