@@ -46,7 +46,8 @@ jobs:
           commit-message: |
             initialize
           body: |
-            initialize
+            はてなブログから取得した記事データを commit しました
+            **${{ inputs.is_draft_included && '下書き記事を含んでいますので公開リポジトリの場合はマージは慎重に行ってください' || '公開記事のみが対象となっています'}}**
           labels: |
             skip-push
           delete-branch: true
