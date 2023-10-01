@@ -22,7 +22,7 @@ runs:
           echo "Error: No draft entry titled ${{ inputs.title }} was found"
           exit 1
         fi
-        echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d')" >> $GITHUB_OUTPUT
+        echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d$')" >> $GITHUB_OUTPUT
       shell: bash
     - name: set owner
       id: set-owner
