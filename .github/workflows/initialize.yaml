@@ -33,11 +33,13 @@ jobs:
       - name: delete draft files
         if: inputs.is_draft_included == false
         run: |
-          target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true')
-          IFS=" " read -r -a draft_files <<< "$(echo "$target" | xargs)"
-          for file in "${draft_files[@]}"; do
-            rm "$file"
-          done
+          target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true' || echo "")
+          if [[ ! -z "$target" ]]; then
+            IFS=" " read -r -a draft_files <<< "$(echo "$target" | xargs)"
+            for file in "${draft_files[@]}"; do
+              rm "$file"
+            done
+          fi
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:
