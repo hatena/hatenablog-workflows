@@ -2,7 +2,7 @@ name: pull draft by title
 
 inputs:
   title:
-    desctipton: draft entry title
+    description: draft entry title
     required: true
   BLOG_DOMAIN:
     required: true
