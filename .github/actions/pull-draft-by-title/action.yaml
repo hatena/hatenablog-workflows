@@ -23,6 +23,7 @@ runs:
           exit 1
         fi
         echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d$')" >> $GITHUB_OUTPUT
+        echo "PREVIEW_URL="$(yq --front-matter=extract '.PreviewURL'  "$entry")"" >> $GITHUB_OUTPUT
       shell: bash
     - name: set owner
       id: set-owner
@@ -47,6 +48,7 @@ runs:
       env:
         OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
         ENTRY_ID: ${{ steps.find-entry.outputs.ENTRY_ID }}
+        PREVIEW_URL: ${{ steps.find-entry.outputs.PREVIEW_URL }}
       with:
         title: ${{ github.event.inputs.title }}
         branch: draft-entry-${{ env.ENTRY_ID }}
@@ -54,4 +56,7 @@ runs:
           ## ${{ github.event.inputs.title }}
           編集ページのURL
           https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
+
+          プレビュー用のURL
+          ${{ env.PREVIEW_URL }}
         delete-branch: true
