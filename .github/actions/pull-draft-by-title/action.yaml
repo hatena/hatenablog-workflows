@@ -23,7 +23,7 @@ runs:
           exit 1
         fi
         echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d$')" >> $GITHUB_OUTPUT
-        echo "PREVIEW_URL="$(yq --front-matter=extract '.PreviewURL'  "$entry")"" >> $GITHUB_OUTPUT
+        echo "PREVIEW_URL=$(yq --front-matter=extract '.PreviewURL'  "$entry")" >> $GITHUB_OUTPUT
       shell: bash
     - name: set owner
       id: set-owner
