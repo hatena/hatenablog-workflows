@@ -54,9 +54,7 @@ runs:
         branch: draft-entry-${{ env.ENTRY_ID }}
         body: |
           ## ${{ github.event.inputs.title }}
-          編集ページのURL
-          https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
 
-          プレビュー用のURL
-          ${{ env.PREVIEW_URL }}
+          - 編集ページのURL: https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
+          - プレビューへのURL: ${{ env.PREVIEW_URL == 'null' && 'なし' || env.PREVIEW_URL }}
         delete-branch: true
