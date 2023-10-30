@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.0.1](https://github.com/hatena/hatenablog-workflows/compare/v1.2.0...v0.0.1) - 2023-10-27
+## [v1.2.1](https://github.com/hatena/hatenablog-workflows/compare/v1.2.0...v1.2.1) - 2023-10-27
 - tagprを導入 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/25
 - プレビュー用URLを下書きPRのbodyに追加する by @halkt in https://github.com/hatena/hatenablog-workflows/pull/32
 
