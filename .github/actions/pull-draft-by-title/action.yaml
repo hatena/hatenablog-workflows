@@ -17,13 +17,20 @@ runs:
     - name: find entry
       id: find-entry
       run: |
-        entry=$(grep -xl "Title: ${{ inputs.title }}" $(git ls-files -o --exclude-standard))
-        if [[ -z "$entry" ]]; then
+        files=($(git ls-files -o --exclude-standard))
+        for file in ${files[@]}; do
+          title=$(yq --front-matter=extract '.Title' "$file")
+          if [[ "$title" == ${{ inputs.title }} ]]; then
+            entry_path="$file"
+          fi
+        done
+        if [[ -z "$entry_path" ]]; then
           echo "Error: No draft entry titled ${{ inputs.title }} was found"
           exit 1
         fi
-        echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d$')" >> $GITHUB_OUTPUT
-        echo "PREVIEW_URL=$(yq --front-matter=extract '.PreviewURL'  "$entry")" >> $GITHUB_OUTPUT
+        echo "EDIT_URL=$(yq --front-matter=extract '.EditURL' "$entry_path")" >> $GITHUB_OUTPUT
+        echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry_path" | grep -oP '[^/]+\d$')" >> $GITHUB_OUTPUT
+        echo "PREVIEW_URL=$(yq --front-matter=extract '.PreviewURL' "$entry_path")" >> $GITHUB_OUTPUT
       shell: bash
     - name: set owner
       id: set-owner
@@ -36,7 +43,7 @@ runs:
       shell: bash
     - name: delete other files
       run: |
-        delete_files=($(grep -xL "Title: ${{ inputs.title }}" $(git ls-files -mo --exclude-standard)))
+        delete_files=($(grep -xL "EditURL: ${{ steps.find-entry.outputs.EDIT_URL }}" $(git ls-files -mo --exclude-standard)))
         for file in ${delete_files[@]}; do
           rm "$file"
         done
