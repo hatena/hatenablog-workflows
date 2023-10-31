@@ -1,8 +1,7 @@
-name: pull draft by title
+name: create draft pull request
 
 inputs:
   title:
-    description: draft entry title
     required: true
   BLOG_DOMAIN:
     required: true

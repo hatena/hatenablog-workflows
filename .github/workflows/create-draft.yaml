@@ -39,7 +39,7 @@ jobs:
         run: |
           blogsync pull ${{ inputs.BLOG_DOMAIN }}
       - name: pull draft by title
-        uses: hatena/hatenablog-workflows/.github/actions/pull-draft-by-title@v1
+        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@v1
         with:
           title: ${{ inputs.title }}
           BLOG_DOMAIN: ${{ inputs.BLOG_DOMAIN }}
