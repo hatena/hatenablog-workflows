@@ -31,10 +31,16 @@ jobs:
         env:
           TITLE: ${{ inputs.title }}
       - name: post draft to hatenablog
+        id: post-draft
         run: |
-          blogsync post --draft ${{ inputs.BLOG_DOMAIN }} < 'draft'
+          entry_path=$(blogsync post --draft ${{ inputs.BLOG_DOMAIN }} < 'draft')
+          echo "ENTRY_PATH=$entry_path" >> $GITHUB_OUTPUT
+      - name: pull
+        run: |
+          blogsync pull ${{ inputs.BLOG_DOMAIN }}
       - name: pull draft by title
         uses: hatena/hatenablog-workflows/.github/actions/pull-draft-by-title@v1
         with:
           title: ${{ inputs.title }}
           BLOG_DOMAIN: ${{ inputs.BLOG_DOMAIN }}
+          ENTRY_PATH: ${{ steps.post-draft.outputs.ENTRY_PATH }}
