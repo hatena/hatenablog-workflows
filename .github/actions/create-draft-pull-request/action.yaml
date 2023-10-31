@@ -1,29 +1,22 @@
-name: pull draft by title
+name: create draft pull request
 
 inputs:
   title:
-    description: draft entry title
     required: true
   BLOG_DOMAIN:
+    required: true
+  ENTRY_PATH:
     required: true
 
 runs:
   using: "composite"
   steps:
-    - name: pull
+    - name: set entry variables
+      id: set-entry-variables
       run: |
-        blogsync pull ${{ inputs.BLOG_DOMAIN }}
-      shell: bash
-    - name: find entry
-      id: find-entry
-      run: |
-        entry=$(grep -xl "Title: ${{ inputs.title }}" $(git ls-files -o --exclude-standard))
-        if [[ -z "$entry" ]]; then
-          echo "Error: No draft entry titled ${{ inputs.title }} was found"
-          exit 1
-        fi
-        echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' "$entry" | grep -oP '[^/]+\d$')" >> $GITHUB_OUTPUT
-        echo "PREVIEW_URL=$(yq --front-matter=extract '.PreviewURL'  "$entry")" >> $GITHUB_OUTPUT
+        echo "EDIT_URL=$(yq --front-matter=extract '.EditURL' ${{ inputs.ENTRY_PATH }})" >> $GITHUB_OUTPUT
+        echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' ${{ inputs.ENTRY_PATH }} | grep -oP '[^/]+\d$')" >> $GITHUB_OUTPUT
+        echo "PREVIEW_URL=$(yq --front-matter=extract '.PreviewURL' ${{ inputs.ENTRY_PATH }})" >> $GITHUB_OUTPUT
       shell: bash
     - name: set owner
       id: set-owner
@@ -32,11 +25,11 @@ runs:
         if [[ "$owner" == 'null' ]]; then
           owner=$(yq ".[\"${{ inputs.BLOG_DOMAIN }}\"].username" blogsync.yaml)
         fi
-        echo "OWNER_NAME="$owner"" >> $GITHUB_OUTPUT
+        echo "OWNER_NAME=$owner" >> $GITHUB_OUTPUT
       shell: bash
     - name: delete other files
       run: |
-        delete_files=($(grep -xL "Title: ${{ inputs.title }}" $(git ls-files -mo --exclude-standard)))
+        delete_files=($(grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}" $(git ls-files -mo --exclude-standard)))
         for file in ${delete_files[@]}; do
           rm "$file"
         done
@@ -47,8 +40,8 @@ runs:
       uses: peter-evans/create-pull-request@v5
       env:
         OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
-        ENTRY_ID: ${{ steps.find-entry.outputs.ENTRY_ID }}
-        PREVIEW_URL: ${{ steps.find-entry.outputs.PREVIEW_URL }}
+        ENTRY_ID: ${{ steps.set-entry-variables.outputs.ENTRY_ID }}
+        PREVIEW_URL: ${{ steps.set-entry-variables.outputs.PREVIEW_URL }}
       with:
         title: ${{ github.event.inputs.title }}
         branch: draft-entry-${{ env.ENTRY_ID }}
