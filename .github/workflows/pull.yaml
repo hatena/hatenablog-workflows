@@ -21,15 +21,23 @@ jobs:
           fetch-depth: 0
       - name: setup
         uses: hatena/hatenablog-workflows/.github/actions/setup@v1
+      - name: set blog domain
+        id: set-domain
+        run: |
+          domain=${{ inputs.BLOG_DOMAIN }}
+          echo "BLOG_DOMAIN=$(echo $domain | tr -d '\n\r ')" >> "$GITHUB_OUTPUT"
       - name: pull
         run: |
-          blogsync pull ${{ inputs.BLOG_DOMAIN }}
+          blogsync pull ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
       - name: delete draft files
         run: |
-          draft_files=($(grep -xl 'Draft: true' $(git ls-files -mo --exclude-standard)))
-          for file in ${draft_files[@]}; do
-            rm "$file"
-          done
+          target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true')
+          if [[ -n "$target" ]]; then
+            IFS=" " read -r -a draft_files <<< "$(echo "$target" | xargs)"
+            for file in "${draft_files[@]}"; do
+              rm "$file"
+            done
+          fi
       - name: create pull request
         uses: peter-evans/create-pull-request@v5
         with:

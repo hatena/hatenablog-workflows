@@ -43,9 +43,14 @@ jobs:
             fi
           done
           echo "PUBLISHED_FROM_DRSFT_EDIT_URLS=${published_from_draft_edit_urls[@]}" >> $GITHUB_OUTPUT
+      - name: format blog domain
+        id: set-domain
+        run: |
+          domain="${{ inputs.BLOG_DOMAIN }}"
+          echo "BLOG_DOMAIN=$(echo $domain | tr -d '\n\r ')" >> $GITHUB_OUTPUT
       - name: pull
         run: |
-          blogsync pull ${{ inputs.BLOG_DOMAIN }}
+          blogsync pull ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
       - name: delete other files
         run: |
           files=($(git ls-files -o --exclude-standard))

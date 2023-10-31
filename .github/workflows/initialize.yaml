@@ -24,9 +24,14 @@ jobs:
           fetch-depth: 0
       - name: setup
         uses: hatena/hatenablog-workflows/.github/actions/setup@v1
+      - name: set blog domain
+        id: set-domain
+        run: |
+          domain=${{ inputs.BLOG_DOMAIN }}
+          echo "BLOG_DOMAIN=$(echo $domain | tr -d '\n\r ')" >> "$GITHUB_OUTPUT"
       - name: pull
         run: |
-          blogsync pull ${{ inputs.BLOG_DOMAIN }}
+          blogsync pull ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
       - name: move draft and update metadata
         if: inputs.is_draft_included == true
         uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@v1
@@ -34,7 +39,7 @@ jobs:
         if: inputs.is_draft_included == false
         run: |
           target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true' || echo "")
-          if [[ ! -z "$target" ]]; then
+          if [[ -n "$target" ]]; then
             IFS=" " read -r -a draft_files <<< "$(echo "$target" | xargs)"
             for file in "${draft_files[@]}"; do
               rm "$file"
