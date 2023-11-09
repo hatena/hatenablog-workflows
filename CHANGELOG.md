@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.2.4](https://github.com/hatena/hatenablog-workflows/compare/v1.2.3...v1.2.4) - 2023-11-09
+- blogsyncのバージョンをv0.18.2にする by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/38
+
 ## [v1.2.3](https://github.com/hatena/hatenablog-workflows/compare/v1.2.2...v1.2.3) - 2023-11-02
 - BLOG_DOMAINの改行コード対応 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/36
 
