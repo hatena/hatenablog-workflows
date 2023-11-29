@@ -38,7 +38,7 @@ jobs:
           files=($(git ls-files -o --exclude-standard))
           for file in ${files[@]}; do
             title=$(yq --front-matter=extract '.Title' "$file")
-            if [[ "$title" == ${{ inputs.title }} ]]; then
+            if [[ "$title" == "${{ inputs.title }}" ]]; then
               entry_path="$file"
             fi
           done
