@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
+      ENTRY_TITLE: ${{ inputs.title }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,12 +39,12 @@ jobs:
           files=($(git ls-files -o --exclude-standard))
           for file in ${files[@]}; do
             title=$(yq --front-matter=extract '.Title' "$file")
-            if [[ "$title" == "${{ inputs.title }}" ]]; then
+            if [[ "$title" == "$ENTRY_TITLE" ]]; then
               entry_path="$file"
             fi
           done
           if [[ -z "$entry_path" ]]; then
-            echo "Error: No draft entry titled ${{ inputs.title }} was found"
+            echo "Error: No draft entry titled ${ENTRY_TITLE} was found"
             exit 1
           fi
           echo "ENTRY_PATH=$entry_path" >> $GITHUB_OUTPUT
