@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.2.6](https://github.com/hatena/hatenablog-workflows/compare/v1.2.5...v1.2.6) - 2023-11-30
+- ${{ inputs.title }}を環境変数経由で$ENTRY_TITLEとして渡す by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/43
+
 ## [v1.2.5](https://github.com/hatena/hatenablog-workflows/compare/v1.2.4...v1.2.5) - 2023-11-29
 - README の typo を修正 by @astj in https://github.com/hatena/hatenablog-workflows/pull/40
 - 空白を含むタイトルであっても pull draft を実行可能とする by @hsbt in https://github.com/hatena/hatenablog-workflows/pull/42
