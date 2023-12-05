@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.2.7](https://github.com/hatena/hatenablog-workflows/compare/v1.2.6...v1.2.7) - 2023-12-05
+- git管理下にあるファイルはrmではなくgit restoreする by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/45
+
 ## [v1.2.6](https://github.com/hatena/hatenablog-workflows/compare/v1.2.5...v1.2.6) - 2023-11-30
 - ${{ inputs.title }}を環境変数経由で$ENTRY_TITLEとして渡す by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/43
 
