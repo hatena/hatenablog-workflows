@@ -29,16 +29,16 @@ runs:
       shell: bash
     - name: delete other files
       run: |
-        delete_files=($(grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}" $(git ls-files -o --exclude-standard)))
+        set +e
+        delete_files=$(git ls-files -o --exclude-standard | xargs grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}")
         for file in ${delete_files[@]}; do
           rm "$file"
         done
 
-        restore_files=($(grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}" $(git ls-files -m --exclude-standard)))
-        for file in ${resotre_files[@]}; do
+        restore_files=(git ls-files -m --exclude-standard | xargs grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}")
+        for file in ${restore_files[@]}; do
           git restore "$file"
         done
-      shell: bash
     - name: move draft and update metadata
       uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@v1
     - name: create pull request
