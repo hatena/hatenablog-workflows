@@ -29,7 +29,7 @@ runs:
       shell: bash
     - name: delete other files
       run: |
-        set +e
+        set +eo pipefail
         delete_files=$(git ls-files -o --exclude-standard | xargs -r grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}")
         for file in ${delete_files[@]}; do
           rm "$file"
@@ -39,6 +39,7 @@ runs:
         for file in ${restore_files[@]}; do
           git restore "$file"
         done
+      shell: bash
     - name: move draft and update metadata
       uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@v1
     - name: create pull request
