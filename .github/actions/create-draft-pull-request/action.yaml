@@ -30,12 +30,12 @@ runs:
     - name: delete other files
       run: |
         set +e
-        delete_files=$(git ls-files -o --exclude-standard | xargs grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}")
+        delete_files=$(git ls-files -o --exclude-standard | xargs -r grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}")
         for file in ${delete_files[@]}; do
           rm "$file"
         done
 
-        restore_files=(git ls-files -m --exclude-standard | xargs grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}")
+        restore_files=(git ls-files -m --exclude-standard | xargs -r grep -xL "EditURL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}")
         for file in ${restore_files[@]}; do
           git restore "$file"
         done
