@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.2.8](https://github.com/hatena/hatenablog-workflows/compare/v1.2.7...v1.2.8) - 2023-12-07
+- delete other filesの処理を修正 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/47
+
 ## [v1.2.7](https://github.com/hatena/hatenablog-workflows/compare/v1.2.6...v1.2.7) - 2023-12-05
 - git管理下にあるファイルはrmではなくgit restoreする by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/45
 
