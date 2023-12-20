@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.2.9](https://github.com/hatena/hatenablog-workflows/compare/v1.2.8...v1.2.9) - 2023-12-20
+- create-draft時のタイトルの埋め込みでタイトルをYAMLの値としてエスケープする by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/52
+
 ## [v1.2.8](https://github.com/hatena/hatenablog-workflows/compare/v1.2.7...v1.2.8) - 2023-12-07
 - delete other filesの処理を修正 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/47
 
