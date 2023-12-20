@@ -29,7 +29,7 @@ jobs:
         run: |
           envsubst < draft.template > draft
         env:
-          TITLE: ${{ inputs.title }}
+          TITLE: \'${{ inputs.title }}\'
       - name: set blog domain
         id: set-domain
         run: |
