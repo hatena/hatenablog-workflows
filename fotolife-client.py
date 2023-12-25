@@ -80,6 +80,9 @@ def replace_to_fotolife_syntax(match: re.Match) -> str:
 
     # pathがローカルのファイルを指していなければ何もしない
     path = os.path.join(base_dir, path)
+    print(match)
+    print(base_dir)
+    print(path)
     if not os.path.exists(path):
         return match[0]
 
