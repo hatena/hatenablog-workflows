@@ -8,8 +8,6 @@ on:
 
 jobs:
   push-draft:
-    if: always()
-    needs: upload-image
     runs-on: ubuntu-latest
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
@@ -33,7 +31,3 @@ jobs:
               blogsync push "$file"
             fi
           done
-  upload-image:
-    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@upload-images
-    secrets:
-      OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
