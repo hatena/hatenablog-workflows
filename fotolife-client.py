@@ -76,7 +76,7 @@ def replace_to_fotolife_syntax(match: re.Match) -> str:
     """
     alt = match.group("alt")
     path = match.group("path")
-    title = match.group("title")
+    title = match.group("quot") or match.group("squot")
 
     # pathがローカルのファイルを指していなければ何もしない
     path = os.path.join(base_dir, path)
@@ -119,7 +119,7 @@ def main():
         buf = f.read()
     base_dir = os.path.dirname(target)
 
-    pattern = re.compile(r"""!\[(?P<alt>[^\]]*)\]\((?P<path>[^\)]*?)\s*(?P<title>"(?:[^"]*)"\s*)\)""")
+    pattern = re.compile(r"""!\[(?P<alt>[^\]]*)\]\((?P<path>[^\)]*?)\s*(?P<quot>"(?:[^"]*)"\s*)?(?P<squot>'(?:[^']*)'\s*)?\)""")
     res = pattern.sub(replace_to_fotolife_syntax, buf)
     with open(target, "w", encoding="utf-8") as f:
         f.write(res)
