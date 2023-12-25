@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.10](https://github.com/hatena/hatenablog-workflows/compare/v1.2.9...v1.2.10) - 2023-12-25
+- upload-imagesアクションを追加 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/49
+- chore(deps): update tj-actions/changed-files action to v41 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/54
+
 ## [v1.2.9](https://github.com/hatena/hatenablog-workflows/compare/v1.2.8...v1.2.9) - 2023-12-20
 - create-draft時のタイトルの埋め込みでタイトルをYAMLの値としてエスケープする by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/52
 
