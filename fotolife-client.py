@@ -80,9 +80,6 @@ def replace_to_fotolife_syntax(match: re.Match) -> str:
 
     # pathがローカルのファイルを指していなければ何もしない
     path = os.path.join(base_dir, path)
-    print(match)
-    print(base_dir)
-    print(path)
     if not os.path.exists(path):
         return match[0]
 
@@ -122,7 +119,7 @@ def main():
         buf = f.read()
     base_dir = os.path.dirname(target)
 
-    pattern = re.compile(r"""!\[(?P<alt>[^\]]*)\]\((?P<path>[^\)]*)\s*(?P<title>"(?:[^"]*)"\s*)\)""")
+    pattern = re.compile(r"""!\[(?P<alt>[^\]]*)\]\((?P<path>[^\)]*?)\s*(?P<title>"(?:[^"]*)"\s*)\)""")
     res = pattern.sub(replace_to_fotolife_syntax, buf)
     with open(target, "w", encoding="utf-8") as f:
         f.write(res)
