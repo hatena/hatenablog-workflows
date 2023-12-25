@@ -29,13 +29,13 @@ jobs:
           echo "OWNER_ID=$owner" >> $GITHUB_OUTPUT
       - name: Download the script
         run: |
-          curl -o $PWD/fotolife-client.py https://raw.githubusercontent.com/hatena/hatenablog-workflows/upload-images/fotolife-client.py
-          chmod +x $PWD/fotolife-client.py
+          curl -o /tmp/fotolife-client.py https://raw.githubusercontent.com/hatena/hatenablog-workflows/upload-images/fotolife-client.py
+          chmod +x /tmp/fotolife-client.py
       - name: List all changed files markdown files
         if: steps.changed-entries.outputs.any_changed == 'true'
         run: |
           for f in ${{ steps.changed-entries.outputs.all_changed_files }}; do
-            python3 $PWD/fotolife-client.py "$f"
+            python3 /tmp/fotolife-client.py "$f"
           done
         env:
           HATENA_ID: ${{ steps.set-owner.outputs.OWNER_ID }}
