@@ -70,7 +70,7 @@ def upload_to_fotolife(path: str) -> str|None:
         return None
 
 
-def replace_to_fotolife_syntax(match):
+def replace_to_fotolife_syntax(match: re.Match) -> str:
     """
     Markdownの画像記法で参照されている画像をFotolifeにアップロードしつつ、Fotolife記法に置き換える
     """
@@ -120,7 +120,7 @@ def main():
     base_dir = os.path.dirname(target)
 
     pattern = re.compile(r"""!\[(?P<alt>[^\]]*)\]\((?P<path>[^\)]*)\s*(?P<title>"(?:[^"]*)"\s*)\)""")
-    res = pattern.sub(upload_to_fotolife, buf)
+    res = pattern.sub(replace_to_fotolife_syntax, buf)
     with open(target, "w", encoding="utf-8") as f:
         f.write(res)
 
