@@ -119,7 +119,7 @@ def main():
         buf = f.read()
     base_dir = os.path.dirname(target)
 
-    pattern = re.compile(r"""!\[(?P<alt>[^\]]*)\]\((?P<path>[^\)]*?)\s*(?P<quot>"(?:[^"]*)"\s*)?(?P<squot>'(?:[^']*)'\s*)?\)""")
+    pattern = re.compile(r"""!\[(?P<alt>[^\]]*)\]\((?P<path>[^\)]*?)\s*("(?P<quot>[^"]*)"\s*)?('(?P<squot>[^']*)'\s*)?\)""")
     res = pattern.sub(replace_to_fotolife_syntax, buf)
     with open(target, "w", encoding="utf-8") as f:
         f.write(res)
