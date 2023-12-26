@@ -2,6 +2,10 @@ name: "[Reusable workflows] push draft to hatena blog"
 
 on:
   workflow_call:
+    inputs:
+      revision:
+        default: ${{ github.event.pull_request.head.sha }}
+        type: string
     secrets:
       OWNER_API_KEY:
         required: true
@@ -14,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ inputs.revision }}
           fetch-depth: 0
       - name: setup
         uses: hatena/hatenablog-workflows/.github/actions/setup@v1

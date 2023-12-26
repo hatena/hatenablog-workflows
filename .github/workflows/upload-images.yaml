@@ -5,6 +5,9 @@ on:
     secrets:
       OWNER_API_KEY:
         required: true
+    outputs:
+      revision:
+        value: ${{ jobs.upload-image.outputs.revision }}
 
 jobs:
   upload-image:
