@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       revision:
-        default: ${{ github.event.pull_request.head.sha }}
+        default: ''
         type: string
     secrets:
       OWNER_API_KEY:
