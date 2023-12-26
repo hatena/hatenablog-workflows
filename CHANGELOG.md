@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.2.11](https://github.com/hatena/hatenablog-workflows/compare/v1.2.10...v1.2.11) - 2023-12-26
+- upload-imageのoutputsにrevisionを追加 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/56
+
 ## [v1.2.10](https://github.com/hatena/hatenablog-workflows/compare/v1.2.9...v1.2.10) - 2023-12-25
 - upload-imagesアクションを追加 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/49
 - chore(deps): update tj-actions/changed-files action to v41 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/54
