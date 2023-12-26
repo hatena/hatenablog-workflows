@@ -5,10 +5,15 @@ on:
     secrets:
       OWNER_API_KEY:
         required: true
+    outputs:
+      revision:
+        value: ${{ jobs.upload-image.outputs.revision }}
 
 jobs:
   upload-image:
     runs-on: ubuntu-latest
+    outputs:
+      revision: ${{ steps.commit-and-push.outputs.revision }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,6 +46,7 @@ jobs:
           HATENA_ID: ${{ steps.set-owner.outputs.OWNER_ID }}
           OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
       - name: commit & push
+        id: commit-and-push
         run: |
           git config user.name "actions-user"
           git config user.email "action@github.com"
@@ -51,3 +57,6 @@ jobs:
           git add .
           git commit -m "upload images to fotolife"
           git push
+
+          revision=$(git rev-parse HEAD)
+          echo "REVISION=$revision" >> $GITHUB_OUTPUT
