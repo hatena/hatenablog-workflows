@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.12](https://github.com/hatena/hatenablog-workflows/compare/v1.2.11...v1.2.12) - 2024-01-17
+- pull-draft.yamlのjob名を修正 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/58
+- 内部で利用するblogsyncのバージョンをv0.20.1にアップデート by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/61
+
 ## [v1.2.11](https://github.com/hatena/hatenablog-workflows/compare/v1.2.10...v1.2.11) - 2023-12-26
 - upload-imageのoutputsにrevisionを追加 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/56
 
