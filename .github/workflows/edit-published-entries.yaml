@@ -1,0 +1,14 @@
+name: "[Reusable workflows] edit published entries"
+
+on:
+  workflow_call:
+    secrets:
+      OWNER_API_KEY:
+        required: true
+
+jobs:
+  upload-images:
+    if: github.event.pull_request.merged == false
+    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@v1
+    secrets:
+      OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}

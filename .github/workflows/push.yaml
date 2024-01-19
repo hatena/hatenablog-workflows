@@ -11,16 +11,23 @@ on:
         required: true
 
 jobs:
+  upload-images:
+    if: github.event.pull_request.merged == true
+    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@v1
+    secrets:
+      OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
   push:
     if: |
       github.event.pull_request.merged == true
       && !contains(github.event.pull_request.labels.*.name, 'skip-push')
+    needs: upload-images
     runs-on: ubuntu-latest
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ needs.upload-images.outputs.revision }}
           fetch-depth: 0
       - name: setup
         uses: hatena/hatenablog-workflows/.github/actions/setup@v1
