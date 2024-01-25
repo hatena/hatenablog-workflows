@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.13](https://github.com/hatena/hatenablog-workflows/compare/v1.2.12...v1.2.13) - 2024-01-25
+- chore(deps): update tj-actions/changed-files action to v42 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/62
+- 下書き作成(create-draft-action)時にblogsync fetchを使うように変更する by @halkt in https://github.com/hatena/hatenablog-workflows/pull/64
+
 ## [v1.2.12](https://github.com/hatena/hatenablog-workflows/compare/v1.2.11...v1.2.12) - 2024-01-17
 - pull-draft.yamlのjob名を修正 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/58
 - 内部で利用するblogsyncのバージョンをv0.20.1にアップデート by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/61
