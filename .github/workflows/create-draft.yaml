@@ -40,7 +40,7 @@ jobs:
         run: |
           entry_path=$(blogsync post --draft ${{ steps.set-domain.outputs.BLOG_DOMAIN }} < 'draft')
           echo "ENTRY_PATH=$entry_path" >> "$GITHUB_OUTPUT"
-      - name: pull
+      - name: fetch entry
         run: |
           blogsync fetch ${{ steps.post-draft.outputs.ENTRY_PATH }}
       - name: pull draft by title
