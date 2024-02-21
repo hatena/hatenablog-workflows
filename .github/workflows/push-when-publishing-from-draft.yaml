@@ -62,7 +62,7 @@ jobs:
           done
       - name: create pull request
         id: cpr
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
           title: from draft to publish
           branch: from-draft-to-publish
