@@ -1,4 +1,4 @@
-name: "[Reusable workflows] edit published entries"
+name: "[Reusable workflows] push published entries"
 
 on:
   workflow_call:
