@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.15](https://github.com/hatena/hatenablog-workflows/compare/v1.2.14...v1.2.15) - 2024-03-27
+- chore(deps): update peter-evans/create-pull-request action to v6 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/67
+- chore(deps): update tj-actions/changed-files action to v43 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/70
+
 ## [v1.2.14](https://github.com/hatena/hatenablog-workflows/compare/v1.2.13...v1.2.14) - 2024-01-26
 - blogsyncのバージョンをv0.18.2に戻す by @halkt in https://github.com/hatena/hatenablog-workflows/pull/65
 
