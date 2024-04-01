@@ -20,7 +20,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: list changed entries
         id: changed-entries
-        uses: tj-actions/changed-files@v43
+        uses: tj-actions/changed-files@v44
         with:
           files: |
             **.md
