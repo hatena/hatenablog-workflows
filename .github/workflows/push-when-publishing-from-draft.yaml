@@ -28,7 +28,7 @@ jobs:
         id: changed-draft-files
         uses: tj-actions/changed-files@v43
         with:
-          files: draft_entries/**
+          files: draft_entries/**/*.md
           since_last_remote_commit: true
       - name: blogsync push and delete file
         id: publised-from-draft
