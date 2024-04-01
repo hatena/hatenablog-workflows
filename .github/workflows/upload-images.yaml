@@ -34,7 +34,7 @@ jobs:
           echo "OWNER_ID=$owner" >> $GITHUB_OUTPUT
       - name: Download the script
         run: |
-          curl -o /tmp/fotolife-client.py https://raw.githubusercontent.com/hatena/hatenablog-workflows/v1/fotolife-client.py
+          curl -fsSL -o /tmp/fotolife-client.py https://raw.githubusercontent.com/hatena/hatenablog-workflows/v1/fotolife-client.py
           chmod +x /tmp/fotolife-client.py
       - name: List all changed files markdown files
         if: steps.changed-entries.outputs.any_changed == 'true'
