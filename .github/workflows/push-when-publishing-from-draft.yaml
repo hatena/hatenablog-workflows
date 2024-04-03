@@ -26,9 +26,9 @@ jobs:
         uses: hatena/hatenablog-workflows/.github/actions/setup@v1
       - name: Get changed draft files
         id: changed-draft-files
-        uses: tj-actions/changed-files@v42
+        uses: tj-actions/changed-files@v44
         with:
-          files: draft_entries/**
+          files: draft_entries/**/*.md
           since_last_remote_commit: true
       - name: blogsync push and delete file
         id: publised-from-draft
