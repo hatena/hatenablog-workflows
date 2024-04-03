@@ -37,7 +37,7 @@ jobs:
           for file in ${{ steps.changed-draft-files.outputs.all_changed_files }}; do
             draft=$(yq --front-matter=extract 'select(.Draft == true)' "$file")
             if [[ -z "$draft" ]]; then
-              blogsync push "$file"
+              blogsync push --publish "$file"
               published_from_draft_edit_urls+=($(yq '.EditURL' --front-matter=extract "$file"))
               rm "$file"
             fi
