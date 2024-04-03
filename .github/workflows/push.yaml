@@ -26,7 +26,7 @@ jobs:
         uses: hatena/hatenablog-workflows/.github/actions/setup@v1
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v43
+        uses: tj-actions/changed-files@v44
         with:
           files: ${{ inputs.local_root }}/**/*.md
           since_last_remote_commit: true
