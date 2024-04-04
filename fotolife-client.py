@@ -16,7 +16,7 @@ POST /atom/post
 <entry xmlns="http://purl.org/atom/ns#">
   <title>uploaded by fotolife-client.py</title>
   <content mode="base64" type="{}">{}</content>
-  <generator>fotolife-client.py</generator>
+  <generator>hatena/hatenablog-workflows</generator>
 </entry>
 """
 
