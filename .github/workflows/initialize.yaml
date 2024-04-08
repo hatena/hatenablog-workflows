@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@v1
+        uses: hatena/hatenablog-workflows/.github/actions/setup@blogsync-update-test-v0.20.1
       - name: set blog domain
         id: set-domain
         run: |
