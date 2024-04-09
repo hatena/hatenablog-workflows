@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.16](https://github.com/hatena/hatenablog-workflows/compare/v1.2.15...v1.2.16) - 2024-04-09
+- 画像アップロード時のgenerator名にリポジトリを入れておく by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/75
+- upload-images action を各workflowに組み込む by @halkt in https://github.com/hatena/hatenablog-workflows/pull/69
+
 ## [v1.2.15](https://github.com/hatena/hatenablog-workflows/compare/v1.2.14...v1.2.15) - 2024-04-03
 - chore(deps): update peter-evans/create-pull-request action to v6 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/67
 - chore(deps): update tj-actions/changed-files action to v43 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/70
