@@ -30,34 +30,13 @@ jobs:
         with:
           files: draft_entries/**/*.md
           since_last_remote_commit: true
-      - name: blogsync push and delete file
+      - name: blogsync push
         id: publised-from-draft
         run: |
-          published_from_draft_edit_urls=()
           for file in ${{ steps.changed-draft-files.outputs.all_changed_files }}; do
             draft=$(yq --front-matter=extract 'select(.Draft == true)' "$file")
             if [[ -z "$draft" ]]; then
               blogsync push "$file"
-              published_from_draft_edit_urls+=($(yq '.EditURL' --front-matter=extract "$file"))
-              rm "$file"
-            fi
-          done
-          echo "PUBLISHED_FROM_DRSFT_EDIT_URLS=${published_from_draft_edit_urls[@]}" >> $GITHUB_OUTPUT
-      - name: set blog domain
-        id: set-domain
-        run: |
-          domain="${{ inputs.BLOG_DOMAIN }}"
-          echo "BLOG_DOMAIN=$(echo $domain | tr -d '\n\r ')" >> "$GITHUB_OUTPUT"
-      - name: pull
-        run: |
-          blogsync pull ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
-      - name: delete other files
-        run: |
-          files=($(git ls-files -o --exclude-standard))
-          for file in ${files[@]}; do
-            editurl=$(yq '.EditURL' --front-matter=extract $(echo $file))
-            if printf '%s\n' "${{ steps.publised-from-draft.outputs.PUBLISHED_FROM_DRSFT_EDIT_URLS }}" | grep -qvx "$editurl"; then
-              rm "$file"
             fi
           done
       - name: create pull request
