@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.2.17](https://github.com/hatena/hatenablog-workflows/compare/v1.2.16...v1.2.17) - 2024-04-11
+- Update blogsync v0.20.1 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/77
+
 ## [v1.2.16](https://github.com/hatena/hatenablog-workflows/compare/v1.2.15...v1.2.16) - 2024-04-09
 - 画像アップロード時のgenerator名にリポジトリを入れておく by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/75
 - upload-images action を各workflowに組み込む by @halkt in https://github.com/hatena/hatenablog-workflows/pull/69
