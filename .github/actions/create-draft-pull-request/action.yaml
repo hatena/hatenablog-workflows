@@ -42,7 +42,7 @@ runs:
       shell: bash
     - name: move draft and update metadata
       uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@v1
-    - name: create pull request
+    - name: create draft pull request
       uses: peter-evans/create-pull-request@v6
       env:
         OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
@@ -57,3 +57,4 @@ runs:
           - 編集ページのURL: https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
           - プレビューへのURL: ${{ env.PREVIEW_URL == 'null' && 'なし' || env.PREVIEW_URL }}
         delete-branch: true
+        draft: true
