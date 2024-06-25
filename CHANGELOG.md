@@ -2,10 +2,6 @@
 
 ## [v1.3.0](https://github.com/hatena/hatenablog-workflows/compare/v1.2.17...v1.3.0) - 2024-06-24 - Minor Version Up!!
 - 下書き用の記事のPull Requestの作成時はPull Request自体もdraft状態で作成する by @halkt in https://github.com/hatena/hatenablog-workflows/pull/80
-- create draft アクション および pull draft アクションの際に作成される pull request は 初期状態では draft pull request にするように変更しました
-- **変更した意図**
-  - これらのアクションで作成される成果物(pull request)はあくまでレビュー前の下書き状態のコンテンツを取得するためのアクションになります
-  - そのため作成された pull request 自体の状態も下書きとして扱うほうが理想的な形に近いだろうと判断し、 pull request の初期状態を draft に統一しました
 
 ## [v1.2.17](https://github.com/hatena/hatenablog-workflows/compare/v1.2.16...v1.2.17) - 2024-04-11
 - Update blogsync v0.20.1 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/77
