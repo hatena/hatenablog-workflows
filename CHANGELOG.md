@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.3.0](https://github.com/hatena/hatenablog-workflows/compare/v1.2.17...v1.3.0) - 2024-06-24 - Minor Version Up!!
+- 下書き用の記事のPull Requestの作成時はPull Request自体もdraft状態で作成する by @halkt in https://github.com/hatena/hatenablog-workflows/pull/80
+
 ## [v1.2.17](https://github.com/hatena/hatenablog-workflows/compare/v1.2.16...v1.2.17) - 2024-04-11
 - Update blogsync v0.20.1 by @halkt in https://github.com/hatena/hatenablog-workflows/pull/77
 
