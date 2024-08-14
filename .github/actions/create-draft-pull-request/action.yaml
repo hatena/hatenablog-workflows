@@ -3,6 +3,8 @@ name: create draft pull request
 inputs:
   title:
     required: true
+  draft:
+    required: true
   BLOG_DOMAIN:
     required: true
   ENTRY_PATH:
@@ -57,4 +59,4 @@ runs:
           - 編集ページのURL: https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
           - プレビューへのURL: ${{ env.PREVIEW_URL == 'null' && 'なし' || env.PREVIEW_URL }}
         delete-branch: true
-        draft: true
+        draft: ${{ inputs.draft == 'true' }}
