@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.3.1](https://github.com/hatena/hatenablog-workflows/compare/v1.3.0...v1.3.1) - 2024-08-19
+- Update CHANGELOG.md by @halkt in https://github.com/hatena/hatenablog-workflows/pull/82
+- PullRequestをDraftで作成するかどうかを呼び出し元で選択できるようにする by @halkt in https://github.com/hatena/hatenablog-workflows/pull/84
+
 ## [v1.3.0](https://github.com/hatena/hatenablog-workflows/compare/v1.2.17...v1.3.0) - 2024-06-24 - Minor Version Up!!
 - 下書き用の記事のPull Requestの作成時はPull Request自体もdraft状態で作成する by @halkt in https://github.com/hatena/hatenablog-workflows/pull/80
 - [HatenaBlog Workflows Boilerplate で下書き記事を作成した際にドラフト状態のプルリクエストとして作成されるよう変更しました - はてなブログ開発ブログ](https://staff.hatenablog.com/entry/2024/06/25/163227)
