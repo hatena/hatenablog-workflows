@@ -45,7 +45,7 @@ runs:
     - name: move draft and update metadata
       uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@v1
     - name: create draft pull request
-      uses: peter-evans/create-pull-request@v6
+      uses: peter-evans/create-pull-request@v7
       env:
         OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
         ENTRY_ID: ${{ steps.set-entry-variables.outputs.ENTRY_ID }}
