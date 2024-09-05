@@ -62,7 +62,7 @@ def upload_to_fotolife(path: str) -> str|None:
                 "hatena": "http://www.hatena.ne.jp/info/xmlns#"
             }
             syntaxes = tree.findall("hatena:syntax", ns)
-            syntax = syntaxes[0].text
+            syntax = re.sub(r':image$', ':plain', syntaxes[0].text)
             print(f"[+] uploaded {path}")
             return syntax
     except HTTPError as e:
@@ -88,13 +88,13 @@ def replace_to_fotolife_syntax(match: re.Match) -> str:
         return match[0]
 
     if alt and title:
-        return f"[{syntax}:title={title}:alt={alt}:plain]"
+        return f"[{syntax}:title={title}:alt={alt}]"
     elif (not alt) and title:
-        return f"[{syntax}:title={title}:plain]"
+        return f"[{syntax}:title={title}]"
     elif alt and (not title):
-        return f"[{syntax}:alt={alt}:plain]"
+        return f"[{syntax}:alt={alt}]"
     elif (not alt) and (not title):
-        return f"[{syntax}:plain]"
+        return f"[{syntax}]"
 
 def main():
     """
