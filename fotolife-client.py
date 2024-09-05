@@ -88,13 +88,13 @@ def replace_to_fotolife_syntax(match: re.Match) -> str:
         return match[0]
 
     if alt and title:
-        return f"[{syntax}:title={title}:alt={alt}]"
+        return f"[{syntax}:title={title}:alt={alt}:plain]"
     elif (not alt) and title:
-        return f"[{syntax}:title={title}]"
+        return f"[{syntax}:title={title}:plain]"
     elif alt and (not title):
-        return f"[{syntax}:alt={alt}]"
+        return f"[{syntax}:alt={alt}:plain]"
     elif (not alt) and (not title):
-        return f"[{syntax}]"
+        return f"[{syntax}:plain]"
 
 def main():
     """
