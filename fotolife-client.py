@@ -62,7 +62,7 @@ def upload_to_fotolife(path: str) -> str|None:
                 "hatena": "http://www.hatena.ne.jp/info/xmlns#"
             }
             syntaxes = tree.findall("hatena:syntax", ns)
-            syntax = syntaxes[0].text
+            syntax = re.sub(r':image$', ':plain', syntaxes[0].text)
             print(f"[+] uploaded {path}")
             return syntax
     except HTTPError as e:
