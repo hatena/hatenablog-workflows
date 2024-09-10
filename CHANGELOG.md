@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.3.2](https://github.com/hatena/hatenablog-workflows/compare/v1.3.1...v1.3.2) - 2024-09-10
+- Update tj-actions/changed-files action to v45 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/85
+- フォトライフ記法にplain指定子を追加 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/88
+
 ## [v1.3.1](https://github.com/hatena/hatenablog-workflows/compare/v1.3.0...v1.3.1) - 2024-08-19
 - Update CHANGELOG.md by @halkt in https://github.com/hatena/hatenablog-workflows/pull/82
 - PullRequestをDraftで作成するかどうかを呼び出し元で選択できるようにする by @halkt in https://github.com/hatena/hatenablog-workflows/pull/84
