@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.3.3](https://github.com/hatena/hatenablog-workflows/compare/v1.3.2...v1.3.3) - 2024-10-07
+- Update peter-evans/create-pull-request action to v7 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/87
+
 ## [v1.3.2](https://github.com/hatena/hatenablog-workflows/compare/v1.3.1...v1.3.2) - 2024-09-10
 - Update tj-actions/changed-files action to v45 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/85
 - フォトライフ記法にplain指定子を追加 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/88
