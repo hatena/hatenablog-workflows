@@ -81,6 +81,7 @@ def replace_to_fotolife_syntax(match: re.Match) -> str:
     # pathがローカルのファイルを指していなければ何もしない
     path = os.path.join(base_dir, path)
     if not os.path.exists(path):
+        print(f"[-] Skipped: file not found: {path}")
         return match[0]
 
     syntax = upload_to_fotolife(path)
