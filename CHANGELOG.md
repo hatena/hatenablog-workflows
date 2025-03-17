@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.3.4](https://github.com/hatena/hatenablog-workflows/compare/v1.3.3...v1.3.4) - 2025-03-17
+- 外部のactionのバージョンをSHAで指定 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/94
+- Update tj-actions/changed-files action to v45.0.9 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/96
+
 ## [v1.3.3](https://github.com/hatena/hatenablog-workflows/compare/v1.3.2...v1.3.3) - 2024-10-16
 - Update peter-evans/create-pull-request action to v7 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/87
 - 画像ファイルが見つからなかった時のログを表示する by @morihaya in https://github.com/hatena/hatenablog-workflows/pull/90
