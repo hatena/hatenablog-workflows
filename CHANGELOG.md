@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.3.5](https://github.com/hatena/hatenablog-workflows/compare/v1.3.4...v1.3.5) - 2025-03-21
+- Pin dependencies by @renovate in https://github.com/hatena/hatenablog-workflows/pull/98
+- Update actions/create-github-app-token action to v1.11.7 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/100
+- Update tj-actions/changed-files action to v46 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/95
+
 ## [v1.3.4](https://github.com/hatena/hatenablog-workflows/compare/v1.3.3...v1.3.4) - 2025-03-17
 - 外部のactionのバージョンをSHAで指定 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/94
 - Update tj-actions/changed-files action to v45.0.9 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/96
