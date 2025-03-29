@@ -51,10 +51,10 @@ runs:
         ENTRY_ID: ${{ steps.set-entry-variables.outputs.ENTRY_ID }}
         PREVIEW_URL: ${{ steps.set-entry-variables.outputs.PREVIEW_URL }}
       with:
-        title: ${{ github.event.inputs.title }}
+        title: ${{ inputs.title }}
         branch: draft-entry-${{ env.ENTRY_ID }}
         body: |
-          ## ${{ github.event.inputs.title }}
+          ## ${{ inputs.title }}
 
           - 編集ページのURL: https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
           - プレビューへのURL: ${{ env.PREVIEW_URL == 'null' && 'なし' || env.PREVIEW_URL }}
