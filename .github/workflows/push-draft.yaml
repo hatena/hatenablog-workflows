@@ -26,7 +26,7 @@ jobs:
         uses: hatena/hatenablog-workflows/.github/actions/setup@1e932419b6749d6b4ad3d0e30d07df87a1ed3c3e # v1
       - name: Get changed draft files
         id: changed-draft-files
-        uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32 # v46.0.1
+        uses: tj-actions/changed-files@823fcebdb31bb35fdf2229d9f769b400309430d0 # v46.0.3
         with:
           files: draft_entries/**/*.md
       - name: push only draft entry
