@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@1e932419b6749d6b4ad3d0e30d07df87a1ed3c3e # v1
+        uses: hatena/hatenablog-workflows/.github/actions/setup@c22b101f2e1e694cbdb141b0dd89d134f3a101f9 # v1
       - name: Get changed draft files
         id: changed-draft-files
         uses: tj-actions/changed-files@823fcebdb31bb35fdf2229d9f769b400309430d0 # v46.0.3
