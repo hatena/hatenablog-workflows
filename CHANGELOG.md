@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.3.7](https://github.com/hatena/hatenablog-workflows/compare/v1.3.6...v1.3.7) - 2025-04-14
+- chore(deps): update actions/create-github-app-token action to v2 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/109
+- chore(deps): update tj-actions/changed-files action to v46.0.5 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/111
+- update-actions-ref-hash by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/112
+
 ## [v1.3.6](https://github.com/hatena/hatenablog-workflows/compare/v1.3.5...v1.3.6) - 2025-03-31
 - fix: create-draft may not work without workflow_dispatch or workflow_call event type. by @guitarrapc in https://github.com/hatena/hatenablog-workflows/pull/104
 - chore(deps): update tj-actions/changed-files action to v46.0.3 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/102
