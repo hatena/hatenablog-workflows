@@ -9,6 +9,6 @@ on:
 jobs:
   upload-images:
     if: github.event.pull_request.merged == false
-    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@c22b101f2e1e694cbdb141b0dd89d134f3a101f9 # v1
+    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@4cb2032c9665ad3b0eba9835182e2d23a1d49a81 # v1
     secrets:
       OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
