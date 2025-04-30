@@ -46,6 +46,8 @@ runs:
       uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@4cb2032c9665ad3b0eba9835182e2d23a1d49a81 # v1
     - name: get pull request template
       id: get-pull-request-template
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         pr_template_json=$(gh repo view --json pullRequestTemplates)
         pr_template=$(echo $pr_template_json | jq -r '.pullRequestTemplates[0].body // empty')
