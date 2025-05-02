@@ -44,12 +44,28 @@ runs:
       shell: bash
     - name: move draft and update metadata
       uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@4cb2032c9665ad3b0eba9835182e2d23a1d49a81 # v1
+    - name: get pull request template
+      id: get-pull-request-template
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        pr_template_json=$(gh repo view --json pullRequestTemplates)
+        pr_template=$(echo $pr_template_json | jq -r '.pullRequestTemplates[0].body // empty')
+        if [[ -n "$pr_template" ]]; then
+          echo "PULL_REQUEST_TEMPLATE<<EOF" >> $GITHUB_OUTPUT
+          echo "$pr_template" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        else
+          echo "PULL_REQUEST_TEMPLATE=null" >> $GITHUB_OUTPUT
+        fi
+      shell: bash
     - name: create draft pull request
       uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
       env:
         OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
         ENTRY_ID: ${{ steps.set-entry-variables.outputs.ENTRY_ID }}
         PREVIEW_URL: ${{ steps.set-entry-variables.outputs.PREVIEW_URL }}
+        PR_TEMPLATE: ${{ steps.get-pull-request-template.outputs.PULL_REQUEST_TEMPLATE }}
       with:
         title: ${{ inputs.title }}
         branch: draft-entry-${{ env.ENTRY_ID }}
@@ -58,5 +74,7 @@ runs:
 
           - 編集ページのURL: https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
           - プレビューへのURL: ${{ env.PREVIEW_URL == 'null' && 'なし' || env.PREVIEW_URL }}
+          
+          ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
         delete-branch: true
         draft: ${{ inputs.draft == 'true' }}
