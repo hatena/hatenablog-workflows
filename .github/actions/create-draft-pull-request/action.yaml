@@ -51,30 +51,38 @@ runs:
       run: |
         pr_template_json=$(gh repo view --json pullRequestTemplates)
         pr_template=$(echo $pr_template_json | jq -r '.pullRequestTemplates[0].body // empty')
-        if [[ -n "$pr_template" ]]; then
-          echo "PULL_REQUEST_TEMPLATE<<EOF" >> $GITHUB_OUTPUT
-          echo "$pr_template" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-        else
-          echo "PULL_REQUEST_TEMPLATE=null" >> $GITHUB_OUTPUT
+        if [[ -z "$pr_template" ]]; then
+          pr_template=$(cat<<'EOF'
+          ## ${TITLE}
+
+          - 編集ページのURL: ${EDIT_URL}
+          - プレビューへのURL: ${PREVIEW_URL}
+          
+          ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
+          EOF)
         fi
+        echo "PULL_REQUEST_TEMPLATE<<EOF" >> $GITHUB_OUTPUT
+        echo "$pr_template" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: prepare pull request body
+      id: prepare-pull-request-body
+      env:
+        EDIT_URL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}
+        OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
+        ENTRY_ID: ${{ steps.set-entry-variables.outputs.ENTRY_ID }}
+        PREVIEW_URL: ${{ steps.set-entry-variables.outputs.PREVIEW_URL == 'null' && 'なし' || steps.set-entry-variables.outputs.PREVIEW_URL }}
+        PR_TEMPLATE: ${{ steps.get-pull-request-template.outputs.PULL_REQUEST_TEMPLATE }}
+      run:
+        echo "PULL_REQUEST_BODY<<EOF" >> $GITHUB_OUTPUT
+        echo "${PR_TEMPLATE}" | envsubst '${EDIT_URL} ${OWNER_NAME} ${ENTRY_ID} ${PREVIEW_URL}' >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
       shell: bash
     - name: create draft pull request
       uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
-      env:
-        OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
-        ENTRY_ID: ${{ steps.set-entry-variables.outputs.ENTRY_ID }}
-        PREVIEW_URL: ${{ steps.set-entry-variables.outputs.PREVIEW_URL }}
-        PR_TEMPLATE: ${{ steps.get-pull-request-template.outputs.PULL_REQUEST_TEMPLATE }}
       with:
         title: ${{ inputs.title }}
         branch: draft-entry-${{ env.ENTRY_ID }}
-        body: |
-          ## ${{ inputs.title }}
-
-          - 編集ページのURL: https://blog.hatena.ne.jp/${{ env.OWNER_NAME }}/${{ inputs.BLOG_DOMAIN }}/edit?entry=${{ env.ENTRY_ID }}
-          - プレビューへのURL: ${{ env.PREVIEW_URL == 'null' && 'なし' || env.PREVIEW_URL }}
-          
-          ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
+        body: ${{ steps.prepare-pull-request-body.outputs.PULL_REQUEST_BODY }}
         delete-branch: true
         draft: ${{ inputs.draft == 'true' }}
