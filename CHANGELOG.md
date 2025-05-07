@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.3.8](https://github.com/hatena/hatenablog-workflows/compare/v1.3.7...v1.3.8) - 2025-05-07
+- create-draft-pull-request で PULL_REQUEST_TEMPLATE.md 挿入する by @nemuki in https://github.com/hatena/hatenablog-workflows/pull/114
+- PRテンプレート周りの変更 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/117
+- update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/118
+- EOF) by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/119
+- update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/120
+- ヒアドキュメントをdedent by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/121
+- runが複数行になってなかったので修正 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/122
+- プレースホルダとして${TITLE}も使いたい by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/123
+- Update hatenablog workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/124
+- chore(deps): update songmu/tagpr action to v1.5.2 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/113
+
 ## [v1.3.7](https://github.com/hatena/hatenablog-workflows/compare/v1.3.6...v1.3.7) - 2025-04-14
 - chore(deps): update actions/create-github-app-token action to v2 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/109
 - chore(deps): update tj-actions/changed-files action to v46.0.5 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/111
