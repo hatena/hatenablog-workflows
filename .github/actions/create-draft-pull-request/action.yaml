@@ -52,13 +52,13 @@ runs:
         pr_template=$(gh repo view --json pullRequestTemplates | jq -r '.pullRequestTemplates | [map(select(.filename == "create-draft.md"))[0], map(select(.filename == "PULL_REQUEST_TEMPLATE.md"))[0]] | map(select(. != null)) | first | .body // empty')
         if [[ -z "$pr_template" ]]; then
           pr_template=$(cat<<'EOF'
-          ## ${TITLE}
+        ## ${TITLE}
 
-          - 編集ページのURL: ${EDIT_URL}
-          - プレビューへのURL: ${PREVIEW_URL}
-          
-          ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
-          EOF
+        - 編集ページのURL: ${EDIT_URL}
+        - プレビューへのURL: ${PREVIEW_URL}
+        
+        ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
+        EOF
           )
         fi
         echo "PULL_REQUEST_TEMPLATE<<EOF" >> $GITHUB_OUTPUT
