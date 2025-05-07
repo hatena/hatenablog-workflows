@@ -58,7 +58,8 @@ runs:
           - プレビューへのURL: ${PREVIEW_URL}
           
           ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
-          EOF)
+          EOF
+          )
         fi
         echo "PULL_REQUEST_TEMPLATE<<EOF" >> $GITHUB_OUTPUT
         echo "$pr_template" >> $GITHUB_OUTPUT
