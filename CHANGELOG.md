@@ -1,5 +1,8 @@
 # Changelog
 
+## [v2.0.2](https://github.com/hatena/hatenablog-workflows/compare/v2.0.1...v2.0.2) - 2025-05-07
+- 意図しない記述が入っていたので削除 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/127
+
 ## [v2.0.1](https://github.com/hatena/hatenablog-workflows/compare/v2.0.0...v2.0.1) - 2025-05-07
 - プルリクエストテンプレートに利用するファイルの名前をdraft.mdに変更 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/126
 
