@@ -73,7 +73,7 @@ runs:
         ENTRY_ID: ${{ steps.set-entry-variables.outputs.ENTRY_ID }}
         PREVIEW_URL: ${{ steps.set-entry-variables.outputs.PREVIEW_URL == 'null' && 'なし' || steps.set-entry-variables.outputs.PREVIEW_URL }}
         PR_TEMPLATE: ${{ steps.get-pull-request-template.outputs.PULL_REQUEST_TEMPLATE }}
-      run:
+      run: |
         echo "PULL_REQUEST_BODY<<EOF" >> $GITHUB_OUTPUT
         echo "${PR_TEMPLATE}" | envsubst '${EDIT_URL} ${OWNER_NAME} ${ENTRY_ID} ${PREVIEW_URL}' >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
