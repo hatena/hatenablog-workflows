@@ -43,13 +43,13 @@ runs:
         done
       shell: bash
     - name: move draft and update metadata
-      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@afac8fa1342c722a04bfa7dcc97b05ca0349ee8e # v1
+      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@6cae30451bb43f3a139d2402ec88be2c38b8550b # v1
     - name: get pull request template
       id: get-pull-request-template
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        pr_template=$(gh repo view --json pullRequestTemplates | jq -r '.pullRequestTemplates | [map(select(.filename == "create-draft.md"))[0], map(select(.filename == "PULL_REQUEST_TEMPLATE.md"))[0]] | map(select(. != null)) | first | .body // empty')
+        pr_template=$(gh repo view --json pullRequestTemplates | jq -r '.pullRequestTemplates | [map(select(.filename == "draft.md"))[0], map(select(.filename == "PULL_REQUEST_TEMPLATE.md"))[0]] | map(select(. != null)) | first | .body // empty')
         if [[ -z "$pr_template" ]]; then
           pr_template=$(cat<<'EOF'
         ## ${TITLE}
