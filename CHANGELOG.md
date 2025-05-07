@@ -1,5 +1,8 @@
 # Changelog
 
+## [v2.0.1](https://github.com/hatena/hatenablog-workflows/compare/v2.0.0...v2.0.1) - 2025-05-07
+- プルリクエストテンプレートに利用するファイルの名前をdraft.mdに変更 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/126
+
 ## [v2.0.0](https://github.com/hatena/hatenablog-workflows/compare/v1.3.7...v2.0.0) - 2025-05-07
 - create-draft-pull-request で PULL_REQUEST_TEMPLATE.md 挿入する by @nemuki in https://github.com/hatena/hatenablog-workflows/pull/114
 - PRテンプレート周りの変更 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/117 https://github.com/hatena/hatenablog-workflows/pull/119 https://github.com/hatena/hatenablog-workflows/pull/121 https://github.com/hatena/hatenablog-workflows/pull/122 https://github.com/hatena/hatenablog-workflows/pull/123
