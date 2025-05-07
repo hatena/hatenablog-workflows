@@ -68,6 +68,7 @@ runs:
     - name: prepare pull request body
       id: prepare-pull-request-body
       env:
+        TITLE: ${{ inputs.title }}
         EDIT_URL: ${{ steps.set-entry-variables.outputs.EDIT_URL }}
         OWNER_NAME: ${{ steps.set-owner.outputs.OWNER_NAME }}
         ENTRY_ID: ${{ steps.set-entry-variables.outputs.ENTRY_ID }}
@@ -75,7 +76,7 @@ runs:
         PR_TEMPLATE: ${{ steps.get-pull-request-template.outputs.PULL_REQUEST_TEMPLATE }}
       run: |
         echo "PULL_REQUEST_BODY<<EOF" >> $GITHUB_OUTPUT
-        echo "${PR_TEMPLATE}" | envsubst '${EDIT_URL} ${OWNER_NAME} ${ENTRY_ID} ${PREVIEW_URL}' >> $GITHUB_OUTPUT
+        echo "${PR_TEMPLATE}" | envsubst '${TITLE} ${EDIT_URL} ${PREVIEW_URL} ${OWNER_NAME} ${ENTRY_ID}' >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
       shell: bash
     - name: create draft pull request
