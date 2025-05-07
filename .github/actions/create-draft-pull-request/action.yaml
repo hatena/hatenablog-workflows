@@ -57,7 +57,6 @@ runs:
         - 編集ページのURL: ${EDIT_URL}
         - プレビューへのURL: ${PREVIEW_URL}
         
-        ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
         EOF
           )
         fi
