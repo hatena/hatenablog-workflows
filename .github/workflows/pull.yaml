@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@6cae30451bb43f3a139d2402ec88be2c38b8550b # v1
+        uses: hatena/hatenablog-workflows/.github/actions/setup@9d52996ed404a7b8aea5f3b5801853ad4ee44fdf # v1
       - name: set blog domain
         id: set-domain
         run: |
