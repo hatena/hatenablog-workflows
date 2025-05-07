@@ -49,8 +49,7 @@ runs:
       env:
         GH_TOKEN: ${{ github.token }}
       run: |
-        pr_template_json=$(gh repo view --json pullRequestTemplates)
-        pr_template=$(echo $pr_template_json | jq -r '.pullRequestTemplates[0].body // empty')
+        pr_template=$(gh repo view --json pullRequestTemplates | jq -r '.pullRequestTemplates | [map(select(.filename == "create-draft.md"))[0], map(select(.filename == "PULL_REQUEST_TEMPLATE.md"))[0]] | map(select(. != null)) | first | .body // empty')
         if [[ -z "$pr_template" ]]; then
           pr_template=$(cat<<'EOF'
           ## ${TITLE}
