@@ -43,7 +43,7 @@ runs:
         done
       shell: bash
     - name: move draft and update metadata
-      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@74a09a042b7197c1efd88197ada1797beffea2af # v1
+      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@71217539139fca48ed79c22c3dcd6898d6db6ae9 # v1
     - name: get pull request template
       id: get-pull-request-template
       env:
@@ -52,13 +52,13 @@ runs:
         pr_template=$(gh repo view --json pullRequestTemplates | jq -r '.pullRequestTemplates | [map(select(.filename == "create-draft.md"))[0], map(select(.filename == "PULL_REQUEST_TEMPLATE.md"))[0]] | map(select(. != null)) | first | .body // empty')
         if [[ -z "$pr_template" ]]; then
           pr_template=$(cat<<'EOF'
-          ## ${TITLE}
+        ## ${TITLE}
 
-          - 編集ページのURL: ${EDIT_URL}
-          - プレビューへのURL: ${PREVIEW_URL}
-          
-          ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
-          EOF
+        - 編集ページのURL: ${EDIT_URL}
+        - プレビューへのURL: ${PREVIEW_URL}
+        
+        ${{ env.PR_TEMPLATE != 'null' && env.PR_TEMPLATE || '' }}
+        EOF
           )
         fi
         echo "PULL_REQUEST_TEMPLATE<<EOF" >> $GITHUB_OUTPUT
