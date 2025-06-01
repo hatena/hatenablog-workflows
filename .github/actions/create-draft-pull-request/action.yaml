@@ -82,7 +82,7 @@ runs:
       uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
       with:
         title: ${{ inputs.title }}
-        branch: draft-entry-${{ env.ENTRY_ID }}
+        branch: draft-entry-${{ steps.set-entry-variables.outputs.ENTRY_ID }}
         body: ${{ steps.prepare-pull-request-body.outputs.PULL_REQUEST_BODY }}
         delete-branch: true
         draft: ${{ inputs.draft == 'true' }}
