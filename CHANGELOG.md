@@ -1,5 +1,8 @@
 # Changelog
 
+## [v2.0.3](https://github.com/hatena/hatenablog-workflows/compare/v2.0.2...v2.0.3) - 2025-06-02
+- draft-entry のブランチに ENTRY_ID が設定されないため修正 by @nemuki in https://github.com/hatena/hatenablog-workflows/pull/131
+
 ## [v2.0.2](https://github.com/hatena/hatenablog-workflows/compare/v2.0.1...v2.0.2) - 2025-05-07
 - 意図しない記述が入っていたので削除 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/127
 
