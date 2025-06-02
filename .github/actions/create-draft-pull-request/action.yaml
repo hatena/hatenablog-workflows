@@ -43,7 +43,7 @@ runs:
         done
       shell: bash
     - name: move draft and update metadata
-      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@fa544a63e845030ff65e35d78847e2bc2cab981e # v2
+      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@50f103a4f74e9fb7063728d523014753ef581828 # v2
     - name: get pull request template
       id: get-pull-request-template
       env:
