@@ -1,5 +1,8 @@
 # Changelog
 
+## [v2.0.5](https://github.com/hatena/hatenablog-workflows/compare/v2.0.4...v2.0.5) - 2025-06-02
+- Update hatena/hatenablog-workflows digest to 50f103a by @renovate in https://github.com/hatena/hatenablog-workflows/pull/107
+
 ## [v2.0.4](https://github.com/hatena/hatenablog-workflows/compare/v2.0.3...v2.0.4) - 2025-06-02
 - Update hatena/hatenablog-workflows action to v2 by @renovate in https://github.com/hatena/hatenablog-workflows/pull/129
 
