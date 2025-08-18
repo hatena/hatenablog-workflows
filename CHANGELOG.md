@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.6](https://github.com/hatena/hatenablog-workflows/compare/v2.0.5...v2.0.6) - 2025-08-18
+- Update Songmu/tagpr action to v1.7.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/130
+- Update actions/create-github-app-token action to v2.0.6 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/116
+- Update actions/create-github-app-token action to v2.1.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/137
+- Update actions/checkout action to v4.3.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/138
+- Update actions/checkout action to v5 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/139
+- Update hatena/hatenablog-workflows digest to ce4c0e0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/135
+
 ## [v2.0.5](https://github.com/hatena/hatenablog-workflows/compare/v2.0.4...v2.0.5) - 2025-06-02
 - Update hatena/hatenablog-workflows digest to 50f103a by @renovate in https://github.com/hatena/hatenablog-workflows/pull/107
 
