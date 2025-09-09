@@ -43,7 +43,7 @@ runs:
         done
       shell: bash
     - name: move draft and update metadata
-      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@ce4c0e01255ad9348842e5ce09809c3ec499e43d # v2
+      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@ce4c0e01255ad9348842e5ce09809c3ec499e43d # v2.0.5
     - name: get pull request template
       id: get-pull-request-template
       env:
@@ -79,7 +79,7 @@ runs:
         echo "EOF" >> $GITHUB_OUTPUT
       shell: bash
     - name: create draft pull request
-      uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
+      uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
       with:
         title: ${{ inputs.title }}
         branch: draft-entry-${{ steps.set-entry-variables.outputs.ENTRY_ID }}
