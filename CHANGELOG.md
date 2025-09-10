@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2.0.7](https://github.com/hatena/hatenablog-workflows/compare/v2.0.6...v2.0.7) - 2025-09-10
+- 外部のactionのバージョンをフル指定する by @taiseiue in https://github.com/hatena/hatenablog-workflows/pull/142
+- Update Songmu/tagpr action to v1.9.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/141
+
 ## [v2.0.6](https://github.com/hatena/hatenablog-workflows/compare/v2.0.5...v2.0.6) - 2025-08-18
 - Update Songmu/tagpr action to v1.7.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/130
 - Update actions/create-github-app-token action to v2.0.6 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/116
