@@ -31,7 +31,6 @@ jobs:
           files: draft_entries/**/*.md
           since_last_remote_commit: true
       - name: blogsync push
-        id: publised-from-draft
         run: |
           for file in ${{ steps.changed-draft-files.outputs.all_changed_files }}; do
             draft=$(yq --front-matter=extract 'select(.Draft == true)' "$file")
