@@ -1,5 +1,15 @@
 # Changelog
 
+## [v2.0.8](https://github.com/hatena/hatenablog-workflows/compare/v2.0.7...v2.0.8) - 2026-02-19
+- push-when-publishing-from-draft で未使用の step id を削除 by @ryotaro-shirai in https://github.com/hatena/hatenablog-workflows/pull/155
+- Update tj-actions/changed-files action to v47.0.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/154
+- Update actions/create-github-app-token action to v2.2.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/152
+- Update actions/checkout action to v6 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/150
+- Update Songmu/tagpr action to v1.17.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/157
+- Update tj-actions/changed-files action to v47.0.4 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/158
+- Update peter-evans/create-pull-request action to v8 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/153
+- update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/159
+
 ## [v2.0.7](https://github.com/hatena/hatenablog-workflows/compare/v2.0.6...v2.0.7) - 2025-11-19
 - 外部のactionのバージョンをフル指定する by @taiseiue in https://github.com/hatena/hatenablog-workflows/pull/142
 - Update Songmu/tagpr action to v1.9.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/141
