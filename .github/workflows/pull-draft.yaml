@@ -27,7 +27,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@2c159def2fce5ebed56e62d70136a4a93a435725 # v2.0.5
+        uses: hatena/hatenablog-workflows/.github/actions/setup@960e473e95640024b81d975b512173f78d087c21 # v2.0.5
       - name: set blog domain
         id: set-domain
         run: |
@@ -52,7 +52,7 @@ jobs:
           fi
           echo "ENTRY_PATH=$entry_path" >> $GITHUB_OUTPUT
       - name: pull draft by title
-        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@2c159def2fce5ebed56e62d70136a4a93a435725 # v2.0.5
+        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@960e473e95640024b81d975b512173f78d087c21 # v2.0.5
         with:
           title: ${{ inputs.title }}
           draft: ${{ inputs.draft }}
