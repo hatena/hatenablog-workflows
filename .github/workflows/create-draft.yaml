@@ -27,7 +27,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@ed4c22897bcc6c971686a0a2c0d9d49dddd02f47 
+        uses: hatena/hatenablog-workflows/.github/actions/setup@aa2df9dc72675704d8f7291c874a36cc02807955 
       - name: setup draft
         run: |
           yq --front-matter="process" ".Title=strenv(TITLE)" draft.template > draft
@@ -47,7 +47,7 @@ jobs:
         run: |
           blogsync fetch ${{ steps.post-draft.outputs.ENTRY_PATH }}
       - name: pull draft by title
-        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@ed4c22897bcc6c971686a0a2c0d9d49dddd02f47 
+        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@aa2df9dc72675704d8f7291c874a36cc02807955 
         with:
           title: ${{ inputs.title }}
           draft: ${{ inputs.draft }}
