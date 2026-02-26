@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2.0.9](https://github.com/hatena/hatenablog-workflows/compare/v2.0.8...v2.0.9) - 2026-02-26
+- bug fix: PRのdescriptionで利用するEDIT_URLをWebの編集画面のURLに戻す by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/163
+- update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/165
+
 ## [v2.0.8](https://github.com/hatena/hatenablog-workflows/compare/v2.0.7...v2.0.8) - 2026-02-19
 - push-when-publishing-from-draft で未使用の step id を削除 by @ryotaro-shirai in https://github.com/hatena/hatenablog-workflows/pull/155
 - Update tj-actions/changed-files action to v47.0.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/154
