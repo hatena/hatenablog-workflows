@@ -12,6 +12,10 @@ on:
       BLOG_DOMAIN:
         required: true
         type: string
+      runner:
+        required: false
+        default: ubuntu-latest
+        type: string
     secrets:
       OWNER_API_KEY:
         required: true
@@ -19,7 +23,7 @@ on:
 jobs:
   post_draft_and_pull_from_hatenablog:
     name: create draft and pull from hatenablog
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner }}
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
     steps:

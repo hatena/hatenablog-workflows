@@ -12,13 +12,17 @@ on:
       BLOG_DOMAIN:
         required: true
         type: string
+      runner:
+        required: false
+        default: ubuntu-latest
+        type: string
     secrets:
       OWNER_API_KEY:
         required: true
 
 jobs:
   pull-draft:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner }}
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
       ENTRY_TITLE: ${{ inputs.title }}

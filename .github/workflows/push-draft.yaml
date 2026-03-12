@@ -2,6 +2,11 @@ name: "[Reusable workflows] push draft to hatena blog"
 
 on:
   workflow_call:
+    inputs:
+      runner:
+        required: false
+        default: ubuntu-latest
+        type: string
     secrets:
       OWNER_API_KEY:
         required: true
@@ -14,7 +19,7 @@ jobs:
   push-draft:
     if: always()
     needs: upload-images
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner }}
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
     steps:

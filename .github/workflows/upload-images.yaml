@@ -2,6 +2,11 @@ name: "[Reusable workflows] upload images"
 
 on:
   workflow_call:
+    inputs:
+      runner:
+        required: false
+        default: ubuntu-latest
+        type: string
     secrets:
       OWNER_API_KEY:
         required: true
@@ -11,7 +16,7 @@ on:
 
 jobs:
   upload-image:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner }}
     outputs:
       revision: ${{ steps.commit-and-push.outputs.revision }}
     steps:
