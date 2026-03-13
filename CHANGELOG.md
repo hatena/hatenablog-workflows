@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.0.10](https://github.com/hatena/hatenablog-workflows/compare/v2.0.9...v2.0.10) - 2026-03-13
+- feat: allow users to specify the runner for reusable workflows by @kitagry in https://github.com/hatena/hatenablog-workflows/pull/168
+- chore(deps): update tj-actions/changed-files action to v47.0.5 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/167
+- chore(deps): update songmu/tagpr action to v1.17.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/162
+
 ## [v2.0.9](https://github.com/hatena/hatenablog-workflows/compare/v2.0.8...v2.0.9) - 2026-02-26
 - bug fix: PRのdescriptionで利用するEDIT_URLをWebの編集画面のURLに戻す by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/163
 - update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/165
