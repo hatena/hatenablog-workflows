@@ -9,6 +9,10 @@ on:
       BLOG_DOMAIN:
         required: true
         type: string
+      runner:
+        required: false
+        default: ubuntu-latest
+        type: string
     secrets:
       OWNER_API_KEY:
         required: true
@@ -17,7 +21,7 @@ jobs:
   initialize:
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:

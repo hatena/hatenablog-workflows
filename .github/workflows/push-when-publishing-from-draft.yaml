@@ -6,6 +6,10 @@ on:
       BLOG_DOMAIN:
         required: true
         type: string
+      runner:
+        required: false
+        default: ubuntu-latest
+        type: string
     secrets:
       OWNER_API_KEY:
         required: true
@@ -15,7 +19,7 @@ jobs:
     if: |
       github.event.pull_request.merged == true
       && !contains(github.event.pull_request.labels.*.name, 'skip-push')
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.runner }}
     env:
       BLOGSYNC_PASSWORD: ${{ secrets.OWNER_API_KEY }}
     steps:

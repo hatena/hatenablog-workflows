@@ -2,6 +2,11 @@ name: "[Reusable workflows] push published entries"
 
 on:
   workflow_call:
+    inputs:
+      runner:
+        required: false
+        default: ubuntu-latest
+        type: string
     secrets:
       OWNER_API_KEY:
         required: true
@@ -9,6 +14,8 @@ on:
 jobs:
   upload-images:
     if: github.event.pull_request.merged == false
-    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@ed4c22897bcc6c971686a0a2c0d9d49dddd02f47 
+    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@ed4c22897bcc6c971686a0a2c0d9d49dddd02f47
+    with:
+      runner: ${{ inputs.runner }}
     secrets:
       OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
