@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.0.11](https://github.com/hatena/hatenablog-workflows/compare/v2.0.10...v2.0.11) - 2026-03-16
+- chore(deps): update actions/create-github-app-token action to v2.2.2 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/170
+- chore(deps): update hatena/hatenablog-workflows action to v2.0.10 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/160
+- chore(deps): update hatena/hatenablog-workflows digest to 6c7e091 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/166
+
 ## [v2.0.10](https://github.com/hatena/hatenablog-workflows/compare/v2.0.9...v2.0.10) - 2026-03-13
 - feat: allow users to specify the runner for reusable workflows by @kitagry in https://github.com/hatena/hatenablog-workflows/pull/168
 - chore(deps): update tj-actions/changed-files action to v47.0.5 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/167
