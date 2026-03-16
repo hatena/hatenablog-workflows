@@ -13,7 +13,7 @@ on:
 
 jobs:
   upload-images:
-    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@6c7e0917c0ba2b68ccedc5710fd810805c91fa5f 
+    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@3eaf4acadd317cfcf542efea80b1b14c3701070f 
     secrets:
       OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
   push-draft:
@@ -28,7 +28,7 @@ jobs:
           ref: ${{ needs.upload-images.result == 'success' && needs.upload-images.outputs.revision || '' }}
           fetch-depth: 0
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@6c7e0917c0ba2b68ccedc5710fd810805c91fa5f 
+        uses: hatena/hatenablog-workflows/.github/actions/setup@3eaf4acadd317cfcf542efea80b1b14c3701070f 
       - name: Get changed draft files
         id: changed-draft-files
         uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
