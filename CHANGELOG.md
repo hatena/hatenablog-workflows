@@ -1,5 +1,8 @@
 # Changelog
 
+## [v2.0.12](https://github.com/hatena/hatenablog-workflows/compare/v2.0.11...v2.0.12) - 2026-04-13
+- fix: push-draft実行時のupload-images jobにrunnerの設定を渡す by @Copilot in https://github.com/hatena/hatenablog-workflows/pull/177
+
 ## [v2.0.11](https://github.com/hatena/hatenablog-workflows/compare/v2.0.10...v2.0.11) - 2026-03-16
 - chore(deps): update actions/create-github-app-token action to v2.2.2 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/170
 - chore(deps): update hatena/hatenablog-workflows action to v2.0.10 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/160
