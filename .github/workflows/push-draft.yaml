@@ -14,6 +14,8 @@ on:
 jobs:
   upload-images:
     uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@6c7e0917c0ba2b68ccedc5710fd810805c91fa5f 
+    with:
+      runner: ${{ inputs.runner }}
     secrets:
       OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
   push-draft:
