@@ -1,5 +1,12 @@
 # Changelog
 
+## [v2.0.13](https://github.com/hatena/hatenablog-workflows/compare/v2.0.12...v2.0.13) - 2026-04-30
+- Update actions/create-github-app-token action to v3 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/171
+- Update x-motemen/blogsync action to v0.21.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/181
+- Update tj-actions/changed-files action to v47.0.6 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/182
+- Update peter-evans/create-pull-request action to v8.1.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/179
+- Update Songmu/tagpr action to v1.18.3 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/175
+
 ## [v2.0.12](https://github.com/hatena/hatenablog-workflows/compare/v2.0.11...v2.0.12) - 2026-04-13
 - fix: push-draft実行時のupload-images jobにrunnerの設定を渡す by @Copilot in https://github.com/hatena/hatenablog-workflows/pull/177
 
