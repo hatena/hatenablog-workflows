@@ -27,7 +27,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@6c7e0917c0ba2b68ccedc5710fd810805c91fa5f 
+        uses: hatena/hatenablog-workflows/.github/actions/setup@29cb261487489200b414806a09f0afb52426dd3f 
       - name: set blog domain
         id: set-domain
         run: |
@@ -38,7 +38,7 @@ jobs:
           blogsync pull ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
       - name: move draft and update metadata
         if: inputs.is_draft_included == true
-        uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@6c7e0917c0ba2b68ccedc5710fd810805c91fa5f 
+        uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@29cb261487489200b414806a09f0afb52426dd3f 
       - name: delete draft files
         if: inputs.is_draft_included == false
         run: |
