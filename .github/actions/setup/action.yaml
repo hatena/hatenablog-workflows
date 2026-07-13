@@ -10,7 +10,7 @@ runs:
     - name: setup blogsync
       uses: x-motemen/blogsync@887d46259abad712a468f053a0791befb9b38029 # v0.21.1
       with:
-        version: v0.20.1
+        version: v0.21.1
     - name: restore mtime
       run: |
         git restore-mtime
