@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.0.14](https://github.com/hatena/hatenablog-workflows/compare/v2.0.13...v2.0.14) - 2026-07-13
+
+- setup actionで指定しているblogsyncのバージョンを 0.21.1にする by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/188
+- Update actions/checkout action to v7 - autoclosed by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/186
+- Update actions/create-github-app-token action to v3.2.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/184
+- Update Songmu/tagpr action to v1.20.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/183
+- update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/190
+
 ## [v2.0.13](https://github.com/hatena/hatenablog-workflows/compare/v2.0.12...v2.0.13) - 2026-04-30
 - Update actions/create-github-app-token action to v3 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/171
 - Update x-motemen/blogsync action to v0.21.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/181
