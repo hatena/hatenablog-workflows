@@ -2,5 +2,24 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>hatena/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["hatena/hatenablog-workflows"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["x-motemen/blogsync"],
+      "groupName": "blogsync"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["\\.github/actions/setup/action\\.yaml$"],
+      "matchStrings": ["version:\\s*(?<currentValue>v[\\d.]+)"],
+      "depNameTemplate": "x-motemen/blogsync",
+      "datasourceTemplate": "github-tags"
+    }
   ]
 }
