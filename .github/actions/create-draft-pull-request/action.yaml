@@ -9,6 +9,9 @@ inputs:
     required: true
   ENTRY_PATH:
     required: true
+  working_directory:
+    required: false
+    default: "."
 
 runs:
   using: "composite"
@@ -19,6 +22,7 @@ runs:
         echo "EDIT_URL=$(yq --front-matter=extract '.EditURL' ${{ inputs.ENTRY_PATH }})" >> $GITHUB_OUTPUT
         echo "ENTRY_ID=$(yq --front-matter=extract '.EditURL' ${{ inputs.ENTRY_PATH }} | grep -oP '[^/]+\d$')" >> $GITHUB_OUTPUT
         echo "PREVIEW_URL=$(yq --front-matter=extract '.PreviewURL' ${{ inputs.ENTRY_PATH }})" >> $GITHUB_OUTPUT
+      working-directory: ${{ inputs.working_directory }}
       shell: bash
     - name: set owner
       id: set-owner
@@ -28,6 +32,7 @@ runs:
           owner=$(yq ".[\"${{ inputs.BLOG_DOMAIN }}\"].username" blogsync.yaml)
         fi
         echo "OWNER_NAME=$owner" >> $GITHUB_OUTPUT
+      working-directory: ${{ inputs.working_directory }}
       shell: bash
     - name: delete other files
       run: |
@@ -41,9 +46,12 @@ runs:
         for file in ${restore_files[@]}; do
           git restore "$file"
         done
+      working-directory: ${{ inputs.working_directory }}
       shell: bash
     - name: move draft and update metadata
-      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@34b59225b977353e671e6f643af6ceae40cba1f2 # v2.0.10
+      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@29cb261487489200b414806a09f0afb52426dd3f
+      with:
+        working_directory: ${{ inputs.working_directory }}
     - name: get pull request template
       id: get-pull-request-template
       env:
@@ -63,6 +71,7 @@ runs:
         echo "PULL_REQUEST_TEMPLATE<<EOF" >> $GITHUB_OUTPUT
         echo "$pr_template" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
+      working-directory: ${{ inputs.working_directory }}
       shell: bash
     - name: prepare pull request body
       id: prepare-pull-request-body
@@ -77,6 +86,7 @@ runs:
         echo "PULL_REQUEST_BODY<<EOF" >> $GITHUB_OUTPUT
         echo "${PR_TEMPLATE}" | envsubst '${TITLE} ${EDIT_URL} ${PREVIEW_URL} ${OWNER_NAME} ${ENTRY_ID}' >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
+      working-directory: ${{ inputs.working_directory }}
       shell: bash
     - name: create draft pull request
       uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1

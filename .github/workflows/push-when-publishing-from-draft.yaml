@@ -6,6 +6,10 @@ on:
       BLOG_DOMAIN:
         required: true
         type: string
+      working_directory:
+        required: false
+        default: "."
+        type: string
       runner:
         required: false
         default: ubuntu-latest
@@ -33,6 +37,7 @@ jobs:
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files: draft_entries/**/*.md
+          path: ${{ inputs.working_directory }}
           since_last_remote_commit: true
       - name: blogsync push
         run: |
@@ -42,6 +47,7 @@ jobs:
               blogsync push "$file"
             fi
           done
+        working-directory: ${{ inputs.working_directory }}
       - name: create pull request
         id: cpr
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1

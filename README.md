@@ -4,6 +4,25 @@
 
 サンプル用の[Template リポジトリ](https://github.com/hatena/Hatena-Blog-Workflows-Boilerplate)をご確認ください
 
+### サブディレクトリで記事を管理する
+
+各 reusable workflow は `working_directory` input を受け取ります。リポジトリルートからの相対パスを指定すると、`blogsync.yaml`、`draft.template`、`entries`、`draft_entries` をそのディレクトリ配下から参照します。省略時の値は `.` で、従来どおりリポジトリルートが使われます。
+
+たとえばブログ関連ファイルを `blog/` 配下に置く場合、呼び出し側の workflow で次のように指定します。
+
+```yaml
+jobs:
+  push:
+    uses: hatena/hatenablog-workflows/.github/workflows/push.yaml@<revision>
+    with:
+      working_directory: blog
+      local_root: entries
+    secrets:
+      OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
+```
+
+呼び出し側で `paths` フィルターを設定している場合は、`blog/entries/**` や `blog/draft_entries/**` のように `working_directory` を含むパスを指定してください。
+
 ## Workflows
 
 ### `initialize.yaml`

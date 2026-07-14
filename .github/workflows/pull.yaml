@@ -6,6 +6,10 @@ on:
       BLOG_DOMAIN:
         required: true
         type: string
+      working_directory:
+        required: false
+        default: "."
+        type: string
       runner:
         required: false
         default: ubuntu-latest
@@ -33,6 +37,7 @@ jobs:
       - name: pull
         run: |
           blogsync pull ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
+        working-directory: ${{ inputs.working_directory }}
       - name: delete draft files
         run: |
           target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true')
@@ -42,6 +47,7 @@ jobs:
               rm "$file"
             done
           fi
+        working-directory: ${{ inputs.working_directory }}
       - name: create pull request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:

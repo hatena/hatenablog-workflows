@@ -3,6 +3,10 @@ name: "[Reusable workflows] push draft to hatena blog"
 on:
   workflow_call:
     inputs:
+      working_directory:
+        required: false
+        default: "."
+        type: string
       runner:
         required: false
         default: ubuntu-latest
@@ -16,6 +20,7 @@ jobs:
     uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@29cb261487489200b414806a09f0afb52426dd3f 
     with:
       runner: ${{ inputs.runner }}
+      working_directory: ${{ inputs.working_directory }}
     secrets:
       OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
   push-draft:
@@ -36,6 +41,7 @@ jobs:
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files: draft_entries/**/*.md
+          path: ${{ inputs.working_directory }}
       - name: push only draft entry
         run: |
           for file in ${{ steps.changed-draft-files.outputs.all_changed_files }}; do
@@ -45,3 +51,4 @@ jobs:
               blogsync push "$file"
             fi
           done
+        working-directory: ${{ inputs.working_directory }}

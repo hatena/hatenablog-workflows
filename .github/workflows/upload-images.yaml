@@ -3,6 +3,10 @@ name: "[Reusable workflows] upload images"
 on:
   workflow_call:
     inputs:
+      working_directory:
+        required: false
+        default: "."
+        type: string
       runner:
         required: false
         default: ubuntu-latest
@@ -29,6 +33,7 @@ jobs:
         with:
           files: |
             **.md
+          path: ${{ inputs.working_directory }}
       - name: set owner
         id: set-owner
         run: |
@@ -37,6 +42,7 @@ jobs:
             owner=$(yq "..|.username|select(.)" blogsync.yaml)
           fi
           echo "OWNER_ID=$owner" >> $GITHUB_OUTPUT
+        working-directory: ${{ inputs.working_directory }}
       - name: Download the script
         run: |
           curl -fsSL -o /tmp/fotolife-client.py https://raw.githubusercontent.com/hatena/hatenablog-workflows/v1/fotolife-client.py
@@ -47,6 +53,7 @@ jobs:
           for f in ${{ steps.changed-entries.outputs.all_changed_files }}; do
             python3 /tmp/fotolife-client.py "$f"
           done
+        working-directory: ${{ inputs.working_directory }}
         env:
           HATENA_ID: ${{ steps.set-owner.outputs.OWNER_ID }}
           OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
@@ -65,3 +72,4 @@ jobs:
 
           revision=$(git rev-parse HEAD)
           echo "REVISION=$revision" >> $GITHUB_OUTPUT
+        working-directory: ${{ inputs.working_directory }}

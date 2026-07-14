@@ -12,6 +12,10 @@ on:
       BLOG_DOMAIN:
         required: true
         type: string
+      working_directory:
+        required: false
+        default: "."
+        type: string
       runner:
         required: false
         default: ubuntu-latest
@@ -40,6 +44,7 @@ jobs:
       - name: pull
         run: |
           blogsync pull ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
+        working-directory: ${{ inputs.working_directory }}
       - name: set entry path
         id: set-entry-path
         run: |
@@ -55,6 +60,7 @@ jobs:
             exit 1
           fi
           echo "ENTRY_PATH=$entry_path" >> $GITHUB_OUTPUT
+        working-directory: ${{ inputs.working_directory }}
       - name: pull draft by title
         uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@29cb261487489200b414806a09f0afb52426dd3f 
         with:
@@ -62,3 +68,4 @@ jobs:
           draft: ${{ inputs.draft }}
           BLOG_DOMAIN: ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
           ENTRY_PATH: ${{ steps.set-entry-path.outputs.ENTRY_PATH }}
+          working_directory: ${{ inputs.working_directory }}
