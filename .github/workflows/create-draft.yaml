@@ -12,10 +12,6 @@ on:
       BLOG_DOMAIN:
         required: true
         type: string
-      working_directory:
-        required: false
-        default: "."
-        type: string
       runner:
         required: false
         default: ubuntu-latest
@@ -34,12 +30,15 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
+      - name: resolve working directory
+        id: working-directory
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@29cb261487489200b414806a09f0afb52426dd3f
       - name: setup
         uses: hatena/hatenablog-workflows/.github/actions/setup@29cb261487489200b414806a09f0afb52426dd3f 
       - name: setup draft
         run: |
           yq --front-matter="process" ".Title=strenv(TITLE)" draft.template > draft
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}
         env:
           TITLE: ${{ inputs.title }}
       - name: set blog domain
@@ -52,11 +51,11 @@ jobs:
         run: |
           entry_path=$(blogsync post --draft ${{ steps.set-domain.outputs.BLOG_DOMAIN }} < 'draft')
           echo "ENTRY_PATH=$entry_path" >> "$GITHUB_OUTPUT"
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: fetch entry
         run: |
           blogsync fetch ${{ steps.post-draft.outputs.ENTRY_PATH }}
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: pull draft by title
         uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@29cb261487489200b414806a09f0afb52426dd3f 
         with:
@@ -64,4 +63,4 @@ jobs:
           draft: ${{ inputs.draft }}
           BLOG_DOMAIN: ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
           ENTRY_PATH: ${{ steps.post-draft.outputs.ENTRY_PATH }}
-          working_directory: ${{ inputs.working_directory }}
+          working_directory: ${{ steps.working-directory.outputs.working_directory }}

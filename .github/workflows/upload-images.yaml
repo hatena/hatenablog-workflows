@@ -3,10 +3,6 @@ name: "[Reusable workflows] upload images"
 on:
   workflow_call:
     inputs:
-      working_directory:
-        required: false
-        default: "."
-        type: string
       runner:
         required: false
         default: ubuntu-latest
@@ -27,13 +23,16 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+      - name: resolve working directory
+        id: working-directory
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@29cb261487489200b414806a09f0afb52426dd3f
       - name: list changed entries
         id: changed-entries
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files: |
             **.md
-          path: ${{ inputs.working_directory }}
+          path: ${{ steps.working-directory.outputs.working_directory }}
       - name: set owner
         id: set-owner
         run: |
@@ -42,7 +41,7 @@ jobs:
             owner=$(yq "..|.username|select(.)" blogsync.yaml)
           fi
           echo "OWNER_ID=$owner" >> $GITHUB_OUTPUT
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: Download the script
         run: |
           curl -fsSL -o /tmp/fotolife-client.py https://raw.githubusercontent.com/hatena/hatenablog-workflows/v1/fotolife-client.py
@@ -53,7 +52,7 @@ jobs:
           for f in ${{ steps.changed-entries.outputs.all_changed_files }}; do
             python3 /tmp/fotolife-client.py "$f"
           done
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}
         env:
           HATENA_ID: ${{ steps.set-owner.outputs.OWNER_ID }}
           OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
@@ -72,4 +71,4 @@ jobs:
 
           revision=$(git rev-parse HEAD)
           echo "REVISION=$revision" >> $GITHUB_OUTPUT
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}

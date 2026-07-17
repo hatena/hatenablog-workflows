@@ -3,10 +3,6 @@ name: "[Reusable workflows] push published entries"
 on:
   workflow_call:
     inputs:
-      working_directory:
-        required: false
-        default: "."
-        type: string
       runner:
         required: false
         default: ubuntu-latest
@@ -21,6 +17,5 @@ jobs:
     uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@29cb261487489200b414806a09f0afb52426dd3f
     with:
       runner: ${{ inputs.runner }}
-      working_directory: ${{ inputs.working_directory }}
     secrets:
       OWNER_API_KEY: ${{ secrets.OWNER_API_KEY }}
