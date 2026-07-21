@@ -25,7 +25,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: resolve working directory
         id: working-directory
-        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@29cb261487489200b414806a09f0afb52426dd3f
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@b0f8e00d996323d765bc29c3982874caf28795dd
       - name: list changed entries
         id: changed-entries
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
