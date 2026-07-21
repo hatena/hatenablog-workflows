@@ -26,6 +26,9 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
+      - name: resolve working directory
+        id: working-directory
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@29cb261487489200b414806a09f0afb52426dd3f
       - name: setup
         uses: hatena/hatenablog-workflows/.github/actions/setup@29cb261487489200b414806a09f0afb52426dd3f 
       - name: Get changed draft files
@@ -33,6 +36,7 @@ jobs:
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
         with:
           files: draft_entries/**/*.md
+          path: ${{ steps.working-directory.outputs.working_directory }}
           since_last_remote_commit: true
       - name: blogsync push
         run: |
@@ -42,6 +46,7 @@ jobs:
               blogsync push "$file"
             fi
           done
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: create pull request
         id: cpr
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1

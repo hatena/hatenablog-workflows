@@ -4,6 +4,19 @@
 
 サンプル用の[Template リポジトリ](https://github.com/hatena/Hatena-Blog-Workflows-Boilerplate)をご確認ください
 
+### サブディレクトリで記事を管理する
+
+各 reusable workflow は、Git で管理されている `blogsync.yaml` の親ディレクトリをブログ関連ファイルの基準ディレクトリとして自動的に使用します。
+
+たとえばブログ関連ファイルを `blog/` 配下に置く場合は、`blogsync.yaml`、`draft.template`、`entries`、`draft_entries` をまとめて移動してください。呼び出し側の workflow に基準ディレクトリを指定する必要はありません。
+
+```console
+mkdir blog
+git mv blogsync.yaml draft.template entries draft_entries blog/
+```
+
+`blogsync.yaml` はリポジトリ内に1つだけ配置し、必ず Git で管理してください。見つからない場合や複数見つかった場合は、曖昧なディレクトリで処理を続行せず、workflow がエラー終了します。
+
 ## Workflows
 
 ### `initialize.yaml`

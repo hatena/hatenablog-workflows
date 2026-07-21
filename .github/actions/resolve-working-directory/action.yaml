@@ -1,0 +1,15 @@
+name: resolve working directory
+description: Resolve the blog base directory from the tracked blogsync.yaml file
+
+outputs:
+  working_directory:
+    description: The blog base directory relative to the repository root
+    value: ${{ steps.resolve.outputs.working_directory }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: resolve working directory
+      id: resolve
+      shell: bash
+      run: bash "$GITHUB_ACTION_PATH/resolve.bash"

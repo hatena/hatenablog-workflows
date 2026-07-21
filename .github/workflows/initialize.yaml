@@ -26,6 +26,9 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
+      - name: resolve working directory
+        id: working-directory
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@29cb261487489200b414806a09f0afb52426dd3f
       - name: setup
         uses: hatena/hatenablog-workflows/.github/actions/setup@29cb261487489200b414806a09f0afb52426dd3f 
       - name: set blog domain
@@ -36,9 +39,12 @@ jobs:
       - name: pull
         run: |
           blogsync pull ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: move draft and update metadata
         if: inputs.is_draft_included == true
         uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@29cb261487489200b414806a09f0afb52426dd3f 
+        with:
+          working_directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: delete draft files
         if: inputs.is_draft_included == false
         run: |
@@ -49,6 +55,7 @@ jobs:
               rm "$file"
             done
           fi
+        working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: create pull request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
