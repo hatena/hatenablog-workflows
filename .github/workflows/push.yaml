@@ -28,9 +28,9 @@ jobs:
           fetch-depth: 0
       - name: resolve working directory
         id: working-directory
-        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@b0f8e00d996323d765bc29c3982874caf28795dd
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@4733a78ce725116ca961a11a79ab58ccc24a1b1c
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@b0f8e00d996323d765bc29c3982874caf28795dd 
+        uses: hatena/hatenablog-workflows/.github/actions/setup@4733a78ce725116ca961a11a79ab58ccc24a1b1c 
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
