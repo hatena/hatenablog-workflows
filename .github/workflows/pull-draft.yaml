@@ -32,9 +32,9 @@ jobs:
           fetch-depth: 0
       - name: resolve working directory
         id: working-directory
-        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@29cb261487489200b414806a09f0afb52426dd3f
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@b0f8e00d996323d765bc29c3982874caf28795dd
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@29cb261487489200b414806a09f0afb52426dd3f 
+        uses: hatena/hatenablog-workflows/.github/actions/setup@b0f8e00d996323d765bc29c3982874caf28795dd 
       - name: set blog domain
         id: set-domain
         run: |
@@ -61,7 +61,7 @@ jobs:
           echo "ENTRY_PATH=$entry_path" >> $GITHUB_OUTPUT
         working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: pull draft by title
-        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@29cb261487489200b414806a09f0afb52426dd3f 
+        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@b0f8e00d996323d765bc29c3982874caf28795dd 
         with:
           title: ${{ inputs.title }}
           draft: ${{ inputs.draft }}
