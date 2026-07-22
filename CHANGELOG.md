@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.1.0](https://github.com/hatena/hatenablog-workflows/compare/v2.0.14...v2.1.0) - 2026-07-22
+
+- renovate.json を更新 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/191
+- Support running workflows from a subdirectory by @thangldw in https://github.com/hatena/hatenablog-workflows/pull/193
+- update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/194
+- update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/195
+- 使わないスクリプトを削除 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/196
+
 ## [v2.0.14](https://github.com/hatena/hatenablog-workflows/compare/v2.0.13...v2.0.14) - 2026-07-13
 
 - setup actionで指定しているblogsyncのバージョンを 0.21.1にする by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/188
