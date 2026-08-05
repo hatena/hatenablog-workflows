@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.1.1](https://github.com/hatena/hatenablog-workflows/compare/v2.1.0...v2.1.1) - 2026-08-05
+
+- delete draft filesでgit管理から外れたファイルがあるときにエラーにならないよう修正 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/201
+- from-draft-to-publish のPRを複数立てられない問題を修正 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/202
+- Update Songmu/tagpr action to v1.20.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/197
+- Update actions/checkout action to v7.0.1 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/198
+- update hatenablog-workflows digest by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/204
+
 ## [v2.1.0](https://github.com/hatena/hatenablog-workflows/compare/v2.0.14...v2.1.0) - 2026-07-22
 
 - renovate.json を更新 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/191
