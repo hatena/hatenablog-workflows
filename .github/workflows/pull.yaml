@@ -39,13 +39,11 @@ jobs:
         working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: delete draft files
         run: |
-          target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true')
-          if [[ -n "$target" ]]; then
-            IFS=" " read -r -a draft_files <<< "$(echo "$target" | xargs)"
-            for file in "${draft_files[@]}"; do
-              rm "$file"
-            done
-          fi
+          git ls-files -mo --exclude-standard | while IFS= read -r f; do
+            if [[ -f "$f" ]] && grep -qx 'Draft: true' "$f"; then
+              rm "$f"
+            fi
+          done
         working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: create pull request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
