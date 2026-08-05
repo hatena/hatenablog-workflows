@@ -49,7 +49,7 @@ runs:
       working-directory: ${{ inputs.working_directory }}
       shell: bash
     - name: move draft and update metadata
-      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@4733a78ce725116ca961a11a79ab58ccc24a1b1c
+      uses: hatena/hatenablog-workflows/.github/actions/move-draft-and-update-metadata@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8
       with:
         working_directory: ${{ inputs.working_directory }}
     - name: get pull request template

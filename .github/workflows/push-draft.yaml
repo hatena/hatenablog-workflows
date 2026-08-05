@@ -13,7 +13,7 @@ on:
 
 jobs:
   upload-images:
-    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@4733a78ce725116ca961a11a79ab58ccc24a1b1c 
+    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8 
     with:
       runner: ${{ inputs.runner }}
     secrets:
@@ -31,9 +31,9 @@ jobs:
           fetch-depth: 0
       - name: resolve working directory
         id: working-directory
-        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@4733a78ce725116ca961a11a79ab58ccc24a1b1c
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@4733a78ce725116ca961a11a79ab58ccc24a1b1c 
+        uses: hatena/hatenablog-workflows/.github/actions/setup@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8 
       - name: Get changed draft files
         id: changed-draft-files
         uses: tj-actions/changed-files@9426d40962ed5378910ee2e21d5f8c6fcbf2dd96 # v47.0.6
