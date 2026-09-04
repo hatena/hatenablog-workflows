@@ -25,9 +25,9 @@ jobs:
           fetch-depth: 0
       - name: resolve working directory
         id: working-directory
-        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@d96c1ea3914d647ff9caade1881163be9d58b915
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8 
+        uses: hatena/hatenablog-workflows/.github/actions/setup@d96c1ea3914d647ff9caade1881163be9d58b915 
       - name: set blog domain
         id: set-domain
         run: |

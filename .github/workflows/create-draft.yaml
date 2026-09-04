@@ -32,9 +32,9 @@ jobs:
           fetch-depth: 0
       - name: resolve working directory
         id: working-directory
-        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8
+        uses: hatena/hatenablog-workflows/.github/actions/resolve-working-directory@d96c1ea3914d647ff9caade1881163be9d58b915
       - name: setup
-        uses: hatena/hatenablog-workflows/.github/actions/setup@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8 
+        uses: hatena/hatenablog-workflows/.github/actions/setup@d96c1ea3914d647ff9caade1881163be9d58b915 
       - name: setup draft
         run: |
           yq --front-matter="process" ".Title=strenv(TITLE)" draft.template > draft
@@ -57,7 +57,7 @@ jobs:
           blogsync fetch ${{ steps.post-draft.outputs.ENTRY_PATH }}
         working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: pull draft by title
-        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@cb4a9e94aa1400beceb5d9a99c772322b7fd6fc8 
+        uses: hatena/hatenablog-workflows/.github/actions/create-draft-pull-request@d96c1ea3914d647ff9caade1881163be9d58b915 
         with:
           title: ${{ inputs.title }}
           draft: ${{ inputs.draft }}
