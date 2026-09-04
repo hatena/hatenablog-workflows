@@ -48,13 +48,11 @@ jobs:
       - name: delete draft files
         if: inputs.is_draft_included == false
         run: |
-          target=$(git ls-files -mo --exclude-standard | xargs grep -xl 'Draft: true' || echo "")
-          if [[ -n "$target" ]]; then
-            IFS=" " read -r -a draft_files <<< "$(echo "$target" | xargs)"
-            for file in "${draft_files[@]}"; do
-              rm "$file"
-            done
-          fi
+          git ls-files -zmo --exclude-standard -- '*.md' | while IFS= read -r -d '' f; do
+            if [[ -f "$f" ]] && [[ -n "$(yq --front-matter=extract 'select(.Draft == true)' "$f" 2>/dev/null)" ]]; then
+              rm "$f"
+            fi
+          done
         working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: create pull request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1

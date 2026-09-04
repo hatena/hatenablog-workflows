@@ -39,8 +39,8 @@ jobs:
         working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: delete draft files
         run: |
-          git ls-files -mo --exclude-standard | while IFS= read -r f; do
-            if [[ -f "$f" ]] && grep -qx 'Draft: true' "$f"; then
+          git ls-files -zmo --exclude-standard -- '*.md' | while IFS= read -r -d '' f; do
+            if [[ -f "$f" ]] && [[ -n "$(yq --front-matter=extract 'select(.Draft == true)' "$f" 2>/dev/null)" ]]; then
               rm "$f"
             fi
           done
