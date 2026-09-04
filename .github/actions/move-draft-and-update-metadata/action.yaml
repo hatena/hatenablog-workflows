@@ -10,14 +10,12 @@ runs:
   steps:
     - name: move draft and update metadata
       run: |
-        draft_files=($(grep -xl 'Draft: true' $(git ls-files -mo --exclude-standard) || echo ""))
-        if [[ ${#draft_files[@]} -eq 0 ]]; then
-          exit 0
-        fi
-        for file in ${draft_files[@]}; do
-          entry_id=$(yq --front-matter=extract '.EditURL' "$file" | grep -oP '[^/]+\d$')
-          yq --front-matter=process -i 'del(.Date,.URL)' "$file"
-          mv "$file" "draft_entries/$entry_id.${file##*.}"
+        git ls-files -zmo --exclude-standard -- '*.md' | while IFS= read -r -d '' file; do
+          if [[ -f "$file" ]] && [[ -n "$(yq --front-matter=extract 'select(.Draft == true)' "$file" 2>/dev/null)" ]]; then
+            entry_id=$(yq --front-matter=extract '.EditURL' "$file" | grep -oP '[^/]+\d$')
+            yq --front-matter=process -i 'del(.Date,.URL)' "$file"
+            mv "$file" "draft_entries/$entry_id.${file##*.}"
+          fi
         done
       working-directory: ${{ inputs.working_directory }}
       shell: bash
