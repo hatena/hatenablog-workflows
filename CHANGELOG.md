@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.1.2](https://github.com/hatena/hatenablog-workflows/compare/v2.1.1...v2.1.2) - 2026-09-04
+
+- 下書き判定はフロントマター内部だけを対象にする by @nakataki17 in https://github.com/hatena/hatenablog-workflows/pull/207
+- update hatenablog-workflows digest by @nakataki17 in https://github.com/hatena/hatenablog-workflows/pull/209
+
 ## [v2.1.1](https://github.com/hatena/hatenablog-workflows/compare/v2.1.0...v2.1.1) - 2026-08-05
 
 - delete draft filesでgit管理から外れたファイルがあるときにエラーにならないよう修正 by @theoremoon in https://github.com/hatena/hatenablog-workflows/pull/201
