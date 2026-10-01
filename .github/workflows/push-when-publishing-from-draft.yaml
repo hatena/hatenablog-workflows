@@ -39,13 +39,24 @@ jobs:
           path: ${{ steps.working-directory.outputs.working_directory }}
           since_last_remote_commit: true
       - name: blogsync push
+        id: blogsync-push
         run: |
+          skipped=()
           for file in ${{ steps.changed-draft-files.outputs.all_changed_files }}; do
             draft=$(yq --front-matter=extract 'select(.Draft == true)' "$file")
             if [[ -z "$draft" ]]; then
+              editurl=$(yq --front-matter=extract '.EditURL // ""' "$file")
               blogsync push "$file"
+              # 記事ファイルが残っていれば公開できていないので、ワークフローを失敗させる
+              if [[ -n "$editurl" ]] && [[ -f "$file" ]]; then
+                skipped+=("$file")
+              fi
             fi
           done
+          for file in "${skipped[@]}"; do
+            echo "::error::${file} を公開できませんでした"
+          done
+          echo "skipped=${#skipped[@]}" >> "$GITHUB_OUTPUT"
         working-directory: ${{ steps.working-directory.outputs.working_directory }}
       - name: create pull request
         id: cpr
@@ -66,3 +77,6 @@ jobs:
         with:
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: squash
+      - name: fail if any entry was not published
+        if: steps.blogsync-push.outputs.skipped != '0'
+        run: exit 1
