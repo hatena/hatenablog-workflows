@@ -1,5 +1,10 @@
 # Changelog
 
+## [v2.1.3](https://github.com/hatena/hatenablog-workflows/compare/v2.1.2...v2.1.3) - 2026-10-01
+
+- 下書きから公開できなかった記事があるときはワークフローを失敗させる by @halkt in https://github.com/hatena/hatenablog-workflows/pull/211
+- Update Songmu/tagpr action to v1.21.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/205
+
 ## [v2.1.2](https://github.com/hatena/hatenablog-workflows/compare/v2.1.1...v2.1.2) - 2026-09-04
 
 - 下書き判定はフロントマター内部だけを対象にする by @nakataki17 in https://github.com/hatena/hatenablog-workflows/pull/207
