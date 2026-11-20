@@ -12,6 +12,9 @@ inputs:
   working_directory:
     required: false
     default: "."
+  sign_commits:
+    required: false
+    default: "false"
 
 runs:
   using: "composite"
@@ -96,3 +99,4 @@ runs:
         body: ${{ steps.prepare-pull-request-body.outputs.PULL_REQUEST_BODY }}
         delete-branch: true
         draft: ${{ inputs.draft == 'true' }}
+        sign-commits: ${{ inputs.sign_commits == 'true' }}
