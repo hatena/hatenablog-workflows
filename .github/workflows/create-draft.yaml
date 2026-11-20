@@ -64,3 +64,4 @@ jobs:
           BLOG_DOMAIN: ${{ steps.set-domain.outputs.BLOG_DOMAIN }}
           ENTRY_PATH: ${{ steps.post-draft.outputs.ENTRY_PATH }}
           working_directory: ${{ steps.working-directory.outputs.working_directory }}
+          sign_commits: ${{ vars.HATENABLOG_WORKFLOWS_SIGN_COMMITS == 'true' }}
