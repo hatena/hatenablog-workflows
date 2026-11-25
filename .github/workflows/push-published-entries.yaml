@@ -14,7 +14,7 @@ on:
 jobs:
   upload-images:
     if: github.event.pull_request.merged == false
-    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@d96c1ea3914d647ff9caade1881163be9d58b915
+    uses: hatena/hatenablog-workflows/.github/workflows/upload-images.yaml@6196f4d4ede7023b7810f5d55bc52b6de6a0ab67
     with:
       runner: ${{ inputs.runner }}
     secrets:
