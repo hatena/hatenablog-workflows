@@ -1,5 +1,9 @@
 # Changelog
 
+## [v2.1.5](https://github.com/hatena/hatenablog-workflows/compare/v2.1.4...v2.1.5) - 2026-11-25
+
+- update-revision.bash を git の設定と gsed に依存しないようにする by @halkt in https://github.com/hatena/hatenablog-workflows/pull/220
+
 ## [v2.1.4](https://github.com/hatena/hatenablog-workflows/compare/v2.1.3...v2.1.4) - 2026-11-25
 
 - commit の署名を repository variable で有効にできるようにする by @sota1235 in https://github.com/hatena/hatenablog-workflows/pull/217
