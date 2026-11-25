@@ -57,3 +57,4 @@ jobs:
           labels: |
             skip-push
           delete-branch: true
+          sign-commits: ${{ vars.HATENABLOG_WORKFLOWS_SIGN_COMMITS == 'true' }}

@@ -66,9 +66,40 @@ jobs:
           fi
 
           git add .
-          git commit -m "upload images to fotolife"
-          git push
+          if [[ "$SIGN_COMMITS" == "true" ]]; then
+            if git diff --cached --quiet; then
+              exit 0
+            fi
+            # GitHub API 経由で commit すると、GitHub によって署名された commit になる
+            set -o pipefail
+            cd "$(git rev-parse --show-toplevel)"
+            revision=$(git diff --cached --name-only -z \
+              | xargs -0 -I{} jq -n --arg path {} --rawfile contents {} '{path: $path, contents: ($contents | @base64)}' \
+              | jq -s \
+                --arg repository "$GITHUB_REPOSITORY" \
+                --arg branch "$BRANCH" \
+                --arg head "$(git rev-parse HEAD)" \
+                '{
+                  query: "mutation($input: CreateCommitOnBranchInput!) { createCommitOnBranch(input: $input) { commit { oid } } }",
+                  variables: {
+                    input: {
+                      branch: {repositoryNameWithOwner: $repository, branchName: $branch},
+                      expectedHeadOid: $head,
+                      message: {headline: "upload images to fotolife"},
+                      fileChanges: {additions: .}
+                    }
+                  }
+                }' \
+              | gh api graphql --input - --jq '.data.createCommitOnBranch.commit.oid')
+          else
+            git commit -m "upload images to fotolife"
+            git push
+            revision=$(git rev-parse HEAD)
+          fi
 
-          revision=$(git rev-parse HEAD)
           echo "REVISION=$revision" >> $GITHUB_OUTPUT
         working-directory: ${{ steps.working-directory.outputs.working_directory }}
+        env:
+          SIGN_COMMITS: ${{ vars.HATENABLOG_WORKFLOWS_SIGN_COMMITS == 'true' }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+          GH_TOKEN: ${{ github.token }}
