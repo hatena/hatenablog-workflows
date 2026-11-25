@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.1.4](https://github.com/hatena/hatenablog-workflows/compare/v2.1.3...v2.1.4) - 2026-11-25
+
+- commit の署名を repository variable で有効にできるようにする by @sota1235 in https://github.com/hatena/hatenablog-workflows/pull/217
+- Update peter-evans/create-pull-request action to v8.1.3 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/216
+- Update actions/create-github-app-token action to v3.3.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/214
+- Update Songmu/tagpr action to v1.22.0 by @renovate[bot] in https://github.com/hatena/hatenablog-workflows/pull/213
+- update hatenablog-workflows digest by @halkt in https://github.com/hatena/hatenablog-workflows/pull/219
+
 ## [v2.1.3](https://github.com/hatena/hatenablog-workflows/compare/v2.1.2...v2.1.3) - 2026-10-01
 
 - 下書きから公開できなかった記事があるときはワークフローを失敗させる by @halkt in https://github.com/hatena/hatenablog-workflows/pull/211
